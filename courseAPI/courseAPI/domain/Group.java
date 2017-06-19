@@ -11,10 +11,10 @@ public class Group {
 	private List<Session> groupSessions;
 	
 	public Group(int id, Teacher teacher, int students) {
-		groupId = id;
-		groupTeacher = teacher;
-		numStudents = students;
-		groupSessions = new ArrayList<>();
+		this.groupId = id;
+		this.groupTeacher = teacher;
+		this.numStudents = students;
+		this.groupSessions = new ArrayList<>();
 	}
 	
 	public int getGroupId() {

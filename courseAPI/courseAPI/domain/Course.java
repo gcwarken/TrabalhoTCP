@@ -10,9 +10,9 @@ public class Course {
 	private List<Group> groups;
 	
 	public Course(String name, int id){
-		courseName = name;
-		courseId = id;
-		groups = new ArrayList<>();		
+		this.courseName = name;
+		this.courseId = id;
+		this.groups = new ArrayList<>();		
 	}
 	
 	public String getCourseName(){
