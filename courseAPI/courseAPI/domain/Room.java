@@ -1,5 +1,5 @@
 package courseAPI.domain;
 
-public class building {
+public class Room {
 
 }

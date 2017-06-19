@@ -1,6 +1,6 @@
 package courseAPI;
 
-public class courseAPI {
+public class CourseAPI {
 
 	public static void main(String[] args) {
 

@@ -1,5 +1,5 @@
 package courseAPI.domain;
 
-public class group {
+public class Group {
 
 }
