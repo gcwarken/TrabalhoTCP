@@ -16,10 +16,12 @@ public class Room {
 		this.capacity = _capacity;
 	}
 	
-	public Room(int _id, int _capacity, List<Features> featureList) {
+	public Room(int _id, int _capacity, Feature[] features) {
 		this.id = _id;
-		this.features = featureList;
+		this.features = new ArrayList<>();
 		this.capacity = _capacity;
+		
+		
 	}
 	
 	public int getId() {
