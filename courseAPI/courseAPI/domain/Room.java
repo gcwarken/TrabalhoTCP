@@ -16,6 +16,12 @@ public class Room {
 		this.capacity = _capacity;
 	}
 	
+	public Room(int _id, int _capacity, List<Features> featureList) {
+		this.id = _id;
+		this.features = featureList;
+		this.capacity = _capacity;
+	}
+	
 	public int getId() {
 		return id;
 	}
@@ -31,6 +37,8 @@ public class Room {
 	public boolean getAvailability() {
 		return available;
 	}
+	
+	
 	
 	
 }
