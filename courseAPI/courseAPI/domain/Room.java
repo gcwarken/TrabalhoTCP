@@ -32,8 +32,8 @@ public class Room {
 		return capacity;
 	}
 
-	public void roomNotAvailable() {
-		available = false;
+	public void updateAvailability(boolean b) {
+		available = b;
 	}
 	
 	public boolean getAvailability() {
