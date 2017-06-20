@@ -24,5 +24,4 @@ public class DataBase {
 		this.sessions = new ArrayList<>();
 	}
 	
-	
 }
