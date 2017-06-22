@@ -23,5 +23,26 @@ public class DataBase {
 		this.rooms = new ArrayList<>();
 		this.sessions = new ArrayList<>();
 	}
+
+	public int addTeacher(Teacher t) {
+	}
+
+	public int addBuilding(Building b) {
+	}
+
+	public int addCourse(Course c) {
+	}
+
+	public int addFeature(Feature f) {
+	}
+
+	public int addGroup(Group g) {
+	}
+	
+	public int addRoom(Room r) {
+	}
+
+	public int addSession(Session s) {
+	}
 	
 }
