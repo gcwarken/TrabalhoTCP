@@ -25,24 +25,38 @@ public class DataBase {
 	}
 
 	public int addTeacher(Teacher t) {
+		this.teachers.add(t);
+		return 0;
 	}
 
 	public int addBuilding(Building b) {
+		this.buildings.add(b);
+		return 0;
 	}
 
 	public int addCourse(Course c) {
+		this.courses.add(c);
+		return 0;
 	}
 
 	public int addFeature(Feature f) {
+		this.features.add(f);
+		return 0;
 	}
 
 	public int addGroup(Group g) {
+		this.groups.add(g);
+		return 0;
 	}
 	
 	public int addRoom(Room r) {
+		this.rooms.add(r);
+		return 0;
 	}
 
 	public int addSession(Session s) {
+		this.sessions.add(s);
+		return 0;
 	}
 	
 }
