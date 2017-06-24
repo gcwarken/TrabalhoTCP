@@ -11,17 +11,17 @@ public class DataBase {
 	private List<Course> courses;
 	private List<Feature> features;
 	private List<Group> groups;
-	private List<Room> rooms;
-	private List<Session> sessions;
+	//private List<Room> rooms;
+	//private List<Session> sessions;
 	
 	public DataBase() {
 		this.teachers = new ArrayList<>();
 		this.buildings = new ArrayList<>();
 		this.courses = new ArrayList<>();
 		this.features = new ArrayList<>();
-		this.groups = new ArrayList<>();
-		this.rooms = new ArrayList<>();
-		this.sessions = new ArrayList<>();
+	//	this.groups = new ArrayList<>();
+	//	this.rooms = new ArrayList<>();
+	//	this.sessions = new ArrayList<>();
 	}
 
 	public int addTeacher(Teacher t) {
@@ -43,20 +43,9 @@ public class DataBase {
 		this.features.add(f);
 		return 0;
 	}
-
+	
 	public int addGroup(Group g) {
 		this.groups.add(g);
 		return 0;
 	}
-	
-	public int addRoom(Room r) {
-		this.rooms.add(r);
-		return 0;
-	}
-
-	public int addSession(Session s) {
-		this.sessions.add(s);
-		return 0;
-	}
-	
 }

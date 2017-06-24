@@ -1,4 +1,4 @@
-package courseAPI.fileHelper;
+package courseAPI.api;
 
 import javax.xml.parsers.DocumentBuilderFactory;
 import javax.xml.parsers.DocumentBuilder;
