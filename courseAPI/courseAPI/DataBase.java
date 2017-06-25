@@ -6,7 +6,7 @@ import courseAPI.domain.*;
 
 public class DataBase {
 
-	private List<Teacher> teachers;
+	//private List<Teacher> teachers;
 	private List<Building> buildings;
 	private List<Course> courses;
 	private List<Feature> features;
@@ -15,7 +15,7 @@ public class DataBase {
 	//private List<Session> sessions;
 	
 	public DataBase() {
-		this.teachers = new ArrayList<>();
+	//	this.teachers = new ArrayList<>();
 		this.buildings = new ArrayList<>();
 		this.courses = new ArrayList<>();
 		this.features = new ArrayList<>();
@@ -24,10 +24,12 @@ public class DataBase {
 	//	this.sessions = new ArrayList<>();
 	}
 
+/*	
 	public int addTeacher(Teacher t) {
 		this.teachers.add(t);
 		return 0;
 	}
+*/
 
 	public int addBuilding(Building b) {
 		this.buildings.add(b);
