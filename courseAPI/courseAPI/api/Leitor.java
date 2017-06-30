@@ -1,39 +1,46 @@
 package courseAPI.api;
 
-import java.util.ArrayList;
-import java.util.List;
-import courseAPI.DataBase;
 import javax.xml.parsers.DocumentBuilderFactory;
+import javax.xml.parsers.ParserConfigurationException;
 import javax.xml.parsers.DocumentBuilder;
 import org.w3c.dom.Document;
-import org.w3c.dom.NodeList;
-import org.w3c.dom.Node;
-import org.w3c.dom.Element;
+import org.xml.sax.SAXException;
 import java.io.File;
+import java.io.IOException;
 
 
 public class Leitor {
 	
-	private String inputFilePath;
+	private String inputFileName;
+	private File inputFile;
 	//private DataBase apiDB;
+	
+	public Leitor(String _inputFileName) {
+		this.inputFileName = _inputFileName;
+		this.inputFile = new File(this.inputFileName);
 		
-	public Document getFileInfo(String fileName) {
+	}
+		
+	public Document getFileInfo() throws ParserConfigurationException {
 		Document doc = null;
-		String extension = fileName.substring(fileName.lastIndexOf(".") + 1, fileName.length());
+		String extension = inputFileName.substring(inputFileName.lastIndexOf(".") + 1, inputFileName.length());
 		
 		if (extension.equals("xml")) {
-			readXml(fileName);
+			readXml(doc);
 		}
-		
+		else System.out.println("Invalid input file");
+			
 		return doc;
 	}
-	
-	private void openFile() {
-	} 
-	
-	private void readXml(String xml) {
-		
-	}
-	
 
+	private void readXml(Document doc) throws ParserConfigurationException {
+	    DocumentBuilderFactory dbFactory = DocumentBuilderFactory.newInstance();
+	    DocumentBuilder dBuilder = dbFactory.newDocumentBuilder();
+	    
+	    try {
+			doc = dBuilder.parse(inputFile);
+		} catch (SAXException | IOException e) {
+			e.printStackTrace();
+		}
+	}
 }
