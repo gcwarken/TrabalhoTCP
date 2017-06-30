@@ -662,22 +662,13 @@
         <feature name='Laboratório de ensino para cadeiras de introdução' id='9' hidden='true'/>
         <feature name='Vídeo conferência' id='10'/>
     </features>
-    
     <buildings>
         <building id='43412(65)'>
-            <room id='ANFV (Anfiteatro Vermelho)' feature_ids='3, 5, 8' number_of_places='76'>
-                
-            </room>
+            <room id='ANFV (Anfiteatro Vermelho)' feature_ids='3, 5, 8' number_of_places='76'></room>
             <room id='ANFA (Anfiteatro Azul)' feature_ids='3, 5, 8' number_of_places='76'></room>
             <room available_for_allocation='false' id='214' feature_ids='4, 5' number_of_places='15'></room>
-            <room available_for_allocation='false' id='216' feature_ids='4, 5' number_of_places='15'>
-                
-                
-                
-            </room>
-            <room available_for_allocation='false' id='220' feature_ids='4, 5, 10' number_of_places='20'>
-                
-            </room>
+            <room available_for_allocation='false' id='216' feature_ids='4, 5' number_of_places='15'></room>
+            <room available_for_allocation='false' id='220' feature_ids='4, 5, 10' number_of_places='20'></room>
         </building>
         <building id='43413(67)'>
             <room id='101' feature_ids='1' note='Laboratório' number_of_places='45'/>

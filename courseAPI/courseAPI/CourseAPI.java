@@ -14,9 +14,12 @@ public class CourseAPI {
 //	    }
 //		String inputFileName = args[0];
 		String inputFileName = "DemandasRecursos.xml";
-		
+		DataBase db = new DataBase();
+				
 		Leitor l = new Leitor(inputFileName);
 		Document dom = l.getFileInfo();
+		
+		TagBuilding.fillDataBase(dom, db);
 	}
 
 }

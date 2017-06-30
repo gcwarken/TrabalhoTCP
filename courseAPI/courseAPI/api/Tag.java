@@ -1,11 +1,10 @@
 package courseAPI.api;
 
-import java.util.ArrayList;
-import java.util.List;
-
 import org.w3c.dom.Document;
-
+import courseAPI.DataBase;
 
 public interface Tag {
-	public void fillDataBase(Document d);
+	
+	public static void fillDataBase(Document d, DataBase db) {}
+	
 }

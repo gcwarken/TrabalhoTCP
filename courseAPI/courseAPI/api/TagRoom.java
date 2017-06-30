@@ -2,11 +2,15 @@ package courseAPI.api;
 
 import org.w3c.dom.Document;
 
-public class TagRoom implements Tag {
+import courseAPI.DataBase;
 
-	@Override
-	public void fillDataBase(Document d) {
-		// TODO Auto-generated method stub
+public class TagRoom implements Tag {
+	
+	private TagRoom() throws Exception {
+		// Tag classes are utility only and should not be instantiated
+	}
+	
+	public static void fillDataBase(Document d, DataBase db) {
 
 	}
 
