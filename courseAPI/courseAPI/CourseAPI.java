@@ -1,14 +1,21 @@
 package courseAPI;
 
-import javax.xml.parsers.ParserConfigurationException;
 import org.w3c.dom.Document;
 import courseAPI.api.*; 
 
 public class CourseAPI {
 
-	public static void main(String[] args) throws ParserConfigurationException {
+	public static void main(String[] args) throws Exception {
 		
-		Leitor l = new Leitor("test.xml");
+//	    if(args.length == 0)
+//	    {
+//	        System.out.println("Para usar a API corretamente digite: java courseAPI inputFile");
+//	        System.exit(0);
+//	    }
+//		String inputFileName = args[0];
+		String inputFileName = "DemandasRecursos.xml";
+		
+		Leitor l = new Leitor(inputFileName);
 		Document dom = l.getFileInfo();
 	}
 

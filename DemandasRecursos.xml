@@ -1,4 +1,4 @@
-<!DOCTYPE allocation SYSTEM "/Users/alex/Dropbox/ruby_misc/allocation/database/allocation.dtd">
+<!-- <!DOCTYPE allocation SYSTEM "/Users/alex/Dropbox/ruby_misc/allocation/database/allocation.dtd"> -->
 <allocation>
     <courses>
         <course name='AGENTES AUTÔNOMOS E SISTEMAS MULTIAGENTES' id='INF05019'>
