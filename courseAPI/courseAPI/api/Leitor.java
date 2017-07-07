@@ -37,7 +37,8 @@ public class Leitor {
 	    DocumentBuilder dBuilder = dbFactory.newDocumentBuilder();
 	    Document doc = null;
 	    try {
-			doc = dBuilder.parse(inputFile);
+			doc = dBuilder.parse(this.inputFile);
+			doc.getDocumentElement().normalize();
 		} catch (SAXException | IOException e) {
 			e.printStackTrace();
 		}

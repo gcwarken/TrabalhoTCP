@@ -1,8 +1,6 @@
 package courseAPI;
 
-import org.w3c.dom.Document;
-import org.w3c.dom.Element;
-import org.w3c.dom.Node;
+import org.w3c.dom.*;
 
 import courseAPI.api.*; 
 
@@ -23,9 +21,18 @@ public class CourseAPI {
 				
 		Leitor l = new Leitor(inputFileName);
 		Document dom = l.getFileInfo();
-		dom.getElementsByTagName("string");
 		
-		//TagBuilding.fillDataBase(dom, db);
+		NodeList nList = dom.getElementsByTagName("string");
+		Node nNode = nList.item(0);
+		Element eElement = (Element) nNode;
+		
+		System.out.println(dom.getDocumentElement().getNodeName());
+		
+		System.out.println(eElement.getElementsByTagName("string").item(1));
+		
+		
+//		TagBuilding.fillDataBase(dom, db);
+		
+		
 	}
-
 }
