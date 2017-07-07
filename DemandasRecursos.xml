@@ -677,18 +677,11 @@
             <room id='104' feature_ids='1' note='Laboratório' number_of_places='45'/>
             <room id='105' feature_ids='2' number_of_places='20'/>
             <room id='106' feature_ids='5, 8' number_of_places='40'/>
-            <room available_for_allocation='false' id='INF (Auditório)' feature_ids='3, 6, 7' number_of_places='155'>
-                
-                
-            </room>
+            <room available_for_allocation='false' id='INF (Auditório)' feature_ids='3, 6, 7' number_of_places='155'></room>
         </building>
         <building id='43424(72)'>
-            <room id='102' feature_ids='5, 8' number_of_places='40'>
-                
-            </room>
-            <room available_for_allocation='false' id='AUDC (Auditório Prof. Castilho)' feature_ids='3, 5, 6, 7' number_of_places='126'>
-                
-            </room>
+            <room id='102' feature_ids='5, 8' number_of_places='40'></room>
+            <room available_for_allocation='false' id='AUDC (Auditório Prof. Castilho)' feature_ids='3, 5, 6, 7' number_of_places='126'></room>
         </building>
         <building id='43425(73)'>
             <room id='101' feature_ids='9' note='Laboratório' number_of_places='40'/>

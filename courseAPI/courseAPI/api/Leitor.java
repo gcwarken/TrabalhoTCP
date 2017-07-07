@@ -16,9 +16,8 @@ public class Leitor {
 	//private DataBase apiDB;
 	
 	public Leitor(String _inputFileName) {
-		this.inputFileName = _inputFileName;
-		this.inputFile = new File(this.inputFileName);
-		
+		inputFileName = _inputFileName;
+		inputFile = new File(inputFileName);	
 	}
 		
 	public Document getFileInfo() throws ParserConfigurationException {
@@ -26,21 +25,23 @@ public class Leitor {
 		String extension = inputFileName.substring(inputFileName.lastIndexOf(".") + 1, inputFileName.length());
 		
 		if (extension.equals("xml")) {
-			readXml(doc);
+			doc = readXml();
 		}
 		else System.out.println("Invalid input file");
 			
 		return doc;
 	}
 
-	private void readXml(Document doc) throws ParserConfigurationException {
+	private Document readXml() throws ParserConfigurationException {
 	    DocumentBuilderFactory dbFactory = DocumentBuilderFactory.newInstance();
 	    DocumentBuilder dBuilder = dbFactory.newDocumentBuilder();
-	    
+	    Document doc = null;
 	    try {
 			doc = dBuilder.parse(inputFile);
 		} catch (SAXException | IOException e) {
 			e.printStackTrace();
 		}
+	    
+	    return doc;
 	}
 }
