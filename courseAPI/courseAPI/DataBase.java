@@ -16,9 +16,9 @@ public class DataBase {
 	
 	public DataBase() {
 	//	this.teachers = new ArrayList<>();
-		this.buildings = new ArrayList<>();
-		this.courses = new ArrayList<>();
-		this.features = new ArrayList<>();
+		this.buildings = new ArrayList<Building>();
+		this.courses = new ArrayList<Course>();
+		this.features = new ArrayList<Feature>();
 	//	this.groups = new ArrayList<>();
 	//	this.rooms = new ArrayList<>();
 	//	this.sessions = new ArrayList<>();
@@ -49,6 +49,18 @@ public class DataBase {
 	public int addGroup(Group g) {
 		this.groups.add(g);
 		return 0;
+	}
+	
+	public List<Building> getBuildings(){
+		return buildings;
+	}
+	
+	public List<Feature> getFeatures(){
+		return features;
+	}
+	
+	public List<Course> getCourses(){
+		return courses;
 	}
 	
 }

@@ -5,27 +5,32 @@ import java.util.List;
 
 public class Group {
 
-	private int groupId;
-	private Teacher groupTeacher;
-	private int numStudents;
+	private String groupId;
+	private String groupTeacher;
+	private Integer numStudents;
 	private List<Session> groupSessions;
 	
-	public Group(int id, Teacher teacher, int students) {
+	public Group(String id, String teacher, int students, List<Session> sessions) {
 		this.groupId = id;
 		this.groupTeacher = teacher;
 		this.numStudents = students;
-		this.groupSessions = new ArrayList<>();
+		this.groupSessions = new ArrayList<Session>();
+		this.groupSessions.addAll(sessions);
 	}
 	
-	public int getGroupId() {
+	public String getGroupId() {
 		return groupId;
 	}
 
-	public Teacher getGroupTeacher() {
+	public String getGroupTeacher() {
 		return groupTeacher;
 	}
 	
-	public int getNumStudents() {
+	public Integer getNumStudents() {
 		return numStudents;
+	}
+	
+	public List<Session> getGroupSessions(){
+		return groupSessions;
 	}
 }

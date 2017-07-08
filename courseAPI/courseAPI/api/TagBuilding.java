@@ -1,17 +1,17 @@
 package courseAPI.api;
 
+import org.w3c.dom.Attr;
 import org.w3c.dom.Document;
 import org.w3c.dom.Node;
 import org.w3c.dom.NodeList;
 import org.w3c.dom.Element;
 
 import courseAPI.DataBase;
+import courseAPI.domain.Building;
+import courseAPI.domain.Course;
 
 public final class TagBuilding implements Tag {
-	
-	private TagBuilding() throws Exception {
-		// Tag classes are utility only and should not be instantiated
-	}
+
 
 	public static void fillDataBase(Document d, DataBase db) {
 		
@@ -22,6 +22,28 @@ public final class TagBuilding implements Tag {
 			
 			
 		}
+	
+	}
+	
+	public Element getElement(Object o, Document doc){
+			
+		Building bObj = (Building) o;
+		
+		Element building = doc.createElement("Building");
+		Attr id = doc.createAttribute("id");
+		id.setValue(bObj.getId().toString());
+		building.setAttributeNode(id);
+		
+		int i;
+		Tag tag = new TagRoom();
+		Element room = doc.createElement("room");
+		for(i = 0; i<bObj.getRooms().size(); i++)
+		{
+			room = tag.getElement(bObj.getRooms().get(i), doc);
+			building.appendChild(room);	
+		}
+		return building;
+		}	
 		
 		
 //		//Get all the transaction elements and then loop over them
@@ -48,6 +70,6 @@ public final class TagBuilding implements Tag {
 //	    }	
 //		
 //		
-	}
+//	}
 	
 }

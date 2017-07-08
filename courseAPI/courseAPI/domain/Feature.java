@@ -1,7 +1,7 @@
 package courseAPI.domain;
 
 public class Feature {
-	private int id;
+	private Integer id;
 	private String name;
 	
 	public Feature(int _id, String _name) {
@@ -9,7 +9,7 @@ public class Feature {
 		this.name = _name;
 	}
 	
-	public int getId() {
+	public Integer getId() {
 		return id;
 	}
 	

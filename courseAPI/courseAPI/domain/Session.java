@@ -3,9 +3,9 @@ package courseAPI.domain;
 public class Session {
 
 	private Room sessionRoom;
-	private int sessionDuration;
-	private int	startTime;
-	private int weekday;
+	private Integer sessionDuration;
+	private Integer	startTime;
+	private Integer weekday;
 	
 	public Session(Room room, int duration, int time, int day) {
 		this.sessionRoom = room;
@@ -18,15 +18,15 @@ public class Session {
 		return sessionRoom;
 	}
 	
-	public int getSessionDuration() {
+	public Integer getSessionDuration() {
 		return sessionDuration;
 	}
 	
-	public int getStartTime() {
+	public Integer getStartTime() {
 		return startTime;
 	}
 	
-	public int getWeekday() {
+	public Integer getWeekday() {
 		return weekday;
 	}
 	

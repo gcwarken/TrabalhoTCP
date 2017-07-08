@@ -5,30 +5,31 @@ import java.util.List;
 
 public class Room {
 
-	private int id;
+	private Integer id;
 	private List<Feature> features;
-	private int capacity;
+	private Integer capacity;
 	private boolean available = true;
 	
 	public Room(int _id, int _capacity) {
 		this.id = _id;
-		this.features = new ArrayList<>();
+		this.features = new ArrayList<Feature>();
 		this.capacity = _capacity;
 	}
 	
-	public Room(int _id, int _capacity, Feature[] features) {
+	public Room(int _id, int _capacity, List<Feature> f) {
 		this.id = _id;
-		this.features = new ArrayList<>();
+		this.features = new ArrayList<Feature>();
+		this.features.addAll(f);
 		this.capacity = _capacity;
 		
 		
 	}
 	
-	public int getId() {
+	public Integer getId() {
 		return id;
 	}
 	
-	public int getCapacity() {
+	public Integer getCapacity() {
 		return capacity;
 	}
 
@@ -38,6 +39,10 @@ public class Room {
 	
 	public boolean getAvailability() {
 		return available;
+	}
+	
+	public List<Feature> getFeatures(){
+		return features;
 	}
 	
 	
