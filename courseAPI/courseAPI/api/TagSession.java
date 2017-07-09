@@ -1,10 +1,18 @@
 package courseAPI.api;
 
+import java.util.ArrayList;
+import java.util.List;
+
+import jxl.Cell;
+import jxl.write.Label;
+import jxl.write.Number;
+
 import org.w3c.dom.Attr;
 import org.w3c.dom.Document;
 import org.w3c.dom.Element;
 
 import courseAPI.DataBase;
+import courseAPI.domain.Group;
 import courseAPI.domain.Session;
 
 public class TagSession implements Tag {
@@ -35,5 +43,22 @@ public class TagSession implements Tag {
 		session.setAttributeNode(start_time);
 		
 		return session;
+	}
+	
+	public List<Cell> getXlsCells(Object o, int colInitial, int rowInitial){
+		Session session = (Session) o;
+		List<Cell> cells = new ArrayList<Cell>();
+		
+		Number roomId = new Number(colInitial++, rowInitial, session.getSessionRoom().getId());
+		cells.add(roomId);
+		Number duration = new Number(colInitial++, rowInitial, session.getSessionDuration());
+		cells.add(duration);
+		//faltou building ID
+		Number weekday = new Number(colInitial++, rowInitial, session.getWeekday());
+		cells.add(weekday);
+		Number startTime = new Number(colInitial++, rowInitial, session.getStartTime());
+		cells.add(startTime);
+	
+		return cells;
 	}
 }

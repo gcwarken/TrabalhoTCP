@@ -82,6 +82,7 @@ public class CourseAPI {
 		
 		Escritor e = new Escritor("saida", db);
 		e.createXml();
+		e.createXls();
 		System.out.println("falous");
 		
 		

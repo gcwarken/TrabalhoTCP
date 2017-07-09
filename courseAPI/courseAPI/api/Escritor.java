@@ -4,6 +4,8 @@ import java.util.ArrayList;
 import java.util.List;
 import courseAPI.DataBase;
 import java.io.File;
+import java.io.IOException;
+
 import org.w3c.dom.*;
 
 import javax.xml.parsers.DocumentBuilder;
@@ -16,6 +18,11 @@ import javax.xml.transform.TransformerFactory;
 import javax.xml.transform.dom.DOMSource;
 import javax.xml.transform.stream.StreamResult;
 
+
+import jxl.*;
+import jxl.write.*; 
+import jxl.write.biff.RowsExceededException;
+
 public class Escritor{
 
 	private String output;
@@ -26,11 +33,6 @@ public class Escritor{
 		output = out;
 		apiDB = db;
 	}
-	
-	public void openFile() {
-		
-	} 
-	
 	
 	public void createXml() throws TransformerException 
 	{
@@ -94,5 +96,43 @@ public class Escritor{
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
+	}
+	
+	public void createXls() {
+		
+		try {
+			WritableWorkbook workbook = Workbook.createWorkbook(new File(output + ".xls"));
+			WritableSheet sheetCourse = workbook.createSheet("Demandas", 0);
+			
+			//Course name column, Course
+			Label label = new Label(0,0,"name");
+			sheetCourse.addCell(label);
+			List<Cell> cells = new ArrayList<Cell>();
+			Tag tag = new TagCourse();
+			int i;
+			for(i = 0; i<apiDB.getCourses().size(); i++)
+			{
+				cells = tag.getXlsCells(apiDB.getCourses().get(i),0,i+1);
+			}
+			for(i = 0; i<cells.size(); i++)
+			{
+				sheetCourse.addCell((WritableCell)cells.get(i));
+			}
+			
+			
+			workbook.write();
+			workbook.close(); 
+			
+		} catch (IOException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		} catch (RowsExceededException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		} catch (WriteException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		
 	}
 }

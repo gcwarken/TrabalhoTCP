@@ -1,5 +1,12 @@
 package courseAPI.api;
 
+import java.util.ArrayList;
+import java.util.List;
+
+import jxl.Cell;
+import jxl.write.Label;
+import jxl.write.Number;
+
 import org.w3c.dom.Attr;
 import org.w3c.dom.Document;
 import org.w3c.dom.Element;
@@ -41,4 +48,23 @@ public class TagGroup implements Tag {
 		return group;
 	}
 
+	public List<Cell> getXlsCells(Object o, int colInitial, int rowInitial){
+		Group group = (Group) o;
+		List<Cell> cells = new ArrayList<Cell>();
+		
+		Tag tag = new TagSession();
+		int i;
+		for(i = 0; i<group.getGroupSessions().size(); i++)
+		{
+			Number numStudents = new Number(colInitial, rowInitial+i, group.getNumStudents());
+			cells.add(numStudents);
+			Label label = new Label(colInitial + 1, rowInitial+i, group.getGroupTeacher());
+			cells.add(label);
+			label = new Label(colInitial + 2, rowInitial+i, group.getGroupId());
+			cells.add(label);
+			cells.addAll(tag.getXlsCells(group.getGroupSessions().get(i), colInitial + 3, rowInitial+i));
+		}		
+		return cells;
+	}
+	
 }
