@@ -19,7 +19,7 @@ public class TagRoom implements Tag {
 
 	}
 	
-	public Element getElement(Object o, Document doc){
+	public Element getElement(Object o, Document doc) {
 		
 		Room rObj = (Room) o;
 		
@@ -30,8 +30,7 @@ public class TagRoom implements Tag {
 		id.setValue(rObj.getId().toString());
 		int i;
 		String features = null;
-		for(i = 0; i<rObj.getFeatures().size(); i++)
-		{
+		for(i = 0; i<rObj.getFeatures().size(); i++) {
 			features = features + ", " +  rObj.getFeatures().get(i);
 		}
 		featureIds.setValue(features);

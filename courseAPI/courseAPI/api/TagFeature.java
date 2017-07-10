@@ -16,8 +16,7 @@ public class TagFeature implements Tag {
 	public static void fillDataBase(Document d, DataBase db) {
 	}
 	
-	public Element getElement(Object o, Document doc)
-	{
+	public Element getElement(Object o, Document doc) {
 		Feature featureObj = (Feature) o;
 		
 		Element feature = doc.createElement("feature");

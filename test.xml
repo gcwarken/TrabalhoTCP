@@ -1,3 +1,63 @@
-<helloworld>
-    <string>Hello World!</string>
-</helloworld>
+<?xml version="1.0"?>
+<allocation>
+    
+    <courses>
+        <course name='AGENTES AUTÔNOMOS E SISTEMAS MULTIAGENTES' id='INF05019'>
+            <group number_of_students='30' teacher='ANA LUCIA CETERTICH BAZZAN, RAFAEL HEITOR BORDINI' id='U'>
+                <session room_id='' duration='240' building_id='' weekday='5' start_time='13:30'/> 
+            </group>
+            <group number_of_students='25' teacher='ANDERSON MACIELI' id='V'>
+                <session room_id='' duration='240' building_id='' weekday='3' start_time='13:30'/> 
+            </group>            
+        </course>        
+        <course name='ALGORÍTMOS E PROGRAMAÇÃO - CIC' id='INF01202'>
+            <group number_of_students='40' teacher='ANDERSON MACIEL' id='A, B'>
+                <session room_id='' duration='120' building_id='' weekday='2' start_time='13:30'/> 
+                <session room_id='' duration='120' building_id='' weekday='4' start_time='13:30'/> 
+            </group>
+            <group number_of_students='20' teacher='ANDERSON MACIEL' id='A'>
+                <session room_id='' duration='120' feature_ids='1' building_id='' weekday='5' start_time='13:30'/> 
+            </group>
+            <group number_of_students='20' teacher='ANDERSON MACIEL' id='B'>
+                <session room_id='' duration='120' feature_ids='1' building_id='' weekday='5' start_time='15:30'/> 
+            </group>
+            <group number_of_students='40' teacher='ANTONIO CARLOS SCHNEIDER BECK FILHO' id='C, D'>
+                <session room_id='' duration='120' building_id='' weekday='1' start_time='10:30'/> 
+                <session room_id='' duration='120' building_id='' weekday='3' start_time='10:30'/> 
+            </group>
+            <group number_of_students='23' teacher='ULISSES BRISOLARA CORREA' id='C'>
+                <session room_id='' duration='120' feature_ids='1' building_id='' weekday='1' start_time='13:30'/> 
+            </group>
+            <group number_of_students='17' teacher='ULISSES BRISOLARA CORREA' id='D'>
+                <session room_id='' duration='120' feature_ids='1' building_id='' weekday='3' start_time='13:30'/> 
+            </group>
+            <group number_of_students='39' teacher='MARA ABEL' id='E, F'>
+                <session room_id='' duration='120' building_id='' weekday='1' start_time='13:30'/> 
+                <session room_id='' duration='120' building_id='' weekday='3' start_time='13:30'/> 
+            </group>
+            <group number_of_students='22' teacher='MARA ABEL' id='E'>
+                <session room_id='' duration='120' feature_ids='1' building_id='' weekday='5' start_time='13:30'/> 
+            </group>
+            <group number_of_students='17' teacher='MARA ABEL' id='F'>
+                <session room_id='' duration='120' feature_ids='1' building_id='' weekday='5' start_time='15:30'/> 
+            </group>
+        </course>
+    </courses>
+
+    <features>
+        <feature name='Laboratório de ensino' id='1'/>
+        <feature name='Laboratório de ensino de hardware' id='2'/>
+        <feature name='Som e microfone' id='3' hidden='true'/>
+    </features>
+    
+    <buildings>
+        <building id='43412(65)'>
+            <room id='ANFV (Anfiteatro Vermelho)' feature_ids='3, 5, 8' number_of_places='76'></room>
+            <room id='ANFA (Anfiteatro Azul)' feature_ids='3, 5, 8' number_of_places='76'></room>
+            <room available_for_allocation='false' id='214' feature_ids='4, 5' number_of_places='15'></room>
+            <room available_for_allocation='false' id='216' feature_ids='4, 5' number_of_places='15'></room>
+            <room available_for_allocation='false' id='220' feature_ids='4, 5, 10' number_of_places='20'></room>
+        </building>        
+    </buildings>
+    
+</allocation>

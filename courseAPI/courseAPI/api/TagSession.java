@@ -21,8 +21,7 @@ public class TagSession implements Tag {
 
 	}
 	
-	public Element getElement(Object o, Document doc)
-	{
+	public Element getElement(Object o, Document doc) {
 		Session sObj = (Session) o;
 		
 		Element session = doc.createElement("Session");
@@ -45,7 +44,7 @@ public class TagSession implements Tag {
 		return session;
 	}
 	
-	public List<Cell> getXlsCells(Object o, int colInitial, int rowInitial){
+	public List<Cell> getXlsCells(Object o, int colInitial, int rowInitial) {
 		Session session = (Session) o;
 		List<Cell> cells = new ArrayList<Cell>();
 		

@@ -17,35 +17,33 @@ public class TagCourse implements Tag {
 	
 	public Element getElement(Object o, Document doc){
 	
-	Course courseObj = (Course) o;
-	
-	Element course = doc.createElement("course");
-	Attr name = doc.createAttribute("name");
-	Attr id = doc.createAttribute("id");
-	name.setValue(courseObj.getCourseName());
-	id.setValue(courseObj.getCourseID());
-	course.setAttributeNode(name);
-	course.setAttributeNode(id);
-	int i;
-	Tag tag = new TagGroup();
-	Element group = doc.createElement("group");
-	for(i = 0; i<courseObj.getGroups().size(); i++)
-	{
-		group = tag.getElement(courseObj.getGroups().get(i), doc);
-		course.appendChild(group);		
+		Course courseObj = (Course) o;
+		
+		Element course = doc.createElement("course");
+		Attr name = doc.createAttribute("name");
+		Attr id = doc.createAttribute("id");
+		name.setValue(courseObj.getCourseName());
+		id.setValue(courseObj.getCourseID());
+		course.setAttributeNode(name);
+		course.setAttributeNode(id);
+		int i;
+		Tag tag = new TagGroup();
+		Element group = doc.createElement("group");
+		for(i = 0; i<courseObj.getGroups().size(); i++) {
+			group = tag.getElement(courseObj.getGroups().get(i), doc);
+			course.appendChild(group);		
+		}
+		 
+		return course;
 	}
-	 
-	return course;
-	}
 	
-	public List<Cell> getXlsCells(Object o, int colInitial, int rowInitial){
+	public List<Cell> getXlsCells(Object o, int colInitial, int rowInitial) {
 		Course course = (Course) o;
 		List<Cell> cells = new ArrayList<Cell>();
 		
 		Tag tag = new TagGroup();
 		int i;
-		for(i = 0; i<course.getGroups().size(); i++)
-		{
+		for(i = 0; i<course.getGroups().size(); i++) {
 			Label label = new Label(colInitial,rowInitial+i, course.getCourseName());
 			cells.add(label);
 			label = new Label(colInitial + 1, rowInitial+i, course.getCourseID());

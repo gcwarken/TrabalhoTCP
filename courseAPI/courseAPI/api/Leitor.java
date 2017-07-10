@@ -4,6 +4,9 @@ import javax.xml.parsers.DocumentBuilderFactory;
 import javax.xml.parsers.ParserConfigurationException;
 import javax.xml.parsers.DocumentBuilder;
 import org.w3c.dom.Document;
+import org.w3c.dom.Element;
+import org.w3c.dom.Node;
+import org.w3c.dom.NodeList;
 import org.xml.sax.SAXException;
 import java.io.File;
 import java.io.IOException;
@@ -43,6 +46,35 @@ public class Leitor {
 			e.printStackTrace();
 		}
 	    
+	    quickTest(doc);
 	    return doc;
 	}
+	
+	private void quickTest(Document doc) {
+		System.out.println("Root element: " + doc.getDocumentElement().getNodeName()); // allocation
+		
+		NodeList nCourses = doc.getElementsByTagName("course");
+
+		for (int i = 0; i < nCourses.getLength(); i++) {
+			Node nCourse = nCourses.item(i);
+			System.out.println("\nCurrent Element: " + nCourse.getNodeName());
+						
+		    Element eCourse = (Element) nCourse;
+		
+		    System.out.println("Course name: " + eCourse .getAttribute("name"));
+		    System.out.println("Course id: " + eCourse.getAttribute("id"));
+		    
+		    NodeList nGroups = nCourse.getChildNodes();
+		    
+		    for (int j = 0; j < nGroups.getLength(); j++) {
+			    if (nGroups.item(j).getNodeType() == Node.ELEMENT_NODE) {
+			        Element eGroup = (Element) nGroups.item(j);
+			        System.out.println("\tGroup id: " + eGroup.getAttribute("id"));
+			        System.out.println("\t\tGroup " + eGroup.getAttribute("id") + " teacher: " + eGroup.getAttribute("teacher"));
+			        System.out.println("\t\tGroup " + eGroup.getAttribute("id") + " number of students: " + eGroup.getAttribute("number_of_students"));
+			    }
+		    }
+		}
+	}
+	
 }

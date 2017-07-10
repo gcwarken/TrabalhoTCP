@@ -41,23 +41,22 @@ public final class TagBuilding implements Tag {
 		int i;
 		Tag tag = new TagRoom();
 		Element room = doc.createElement("room");
-		for(i = 0; i<bObj.getRooms().size(); i++)
-		{
+		for(i = 0; i<bObj.getRooms().size(); i++){
 			room = tag.getElement(bObj.getRooms().get(i), doc);
 			building.appendChild(room);	
 		}
 		return building;
-		}	
+	}	
 		
-		public List<Cell> getXlsCells(Object o, int colInitial, int rowInitial) {
-			List<Cell> cells = new ArrayList<Cell>();
-			/**
-			 * @TODO
-			 * implement this 
-			 */
-			return cells;
-		}
-		
+	public List<Cell> getXlsCells(Object o, int colInitial, int rowInitial) {
+		List<Cell> cells = new ArrayList<Cell>();
+		/**
+		 * @TODO
+		 * implement this 
+		 */
+		return cells;
+	}
+	
 	
 //		//Get all the transaction elements and then loop over them
 //	    NodeList transaction = doc.getElementsByTagName("transaction");

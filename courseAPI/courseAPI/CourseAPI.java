@@ -27,20 +27,8 @@ public class CourseAPI {
 				
 		Leitor l = new Leitor(inputFileName);
 		Document dom = l.getFileInfo();
-		
-		NodeList nList = dom.getElementsByTagName("string");
-		Node nNode = nList.item(0);
-		Element eElement = (Element) nNode;
-		
-		System.out.println(dom.getDocumentElement().getNodeName());
-		
-		System.out.println(eElement.getElementsByTagName("string").item(0));
-//		
-		
+
 //		TagBuilding.fillDataBase(dom, db);
-		
-		
-		
 		
 		//adding features		
 		Feature f1 = new Feature(1,"computador");
