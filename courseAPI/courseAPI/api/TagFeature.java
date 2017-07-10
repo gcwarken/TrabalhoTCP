@@ -1,11 +1,15 @@
 package courseAPI.api;
 
+import java.util.ArrayList;
+import java.util.List;
+
 import org.w3c.dom.Attr;
 import org.w3c.dom.Document;
 import org.w3c.dom.Element;
 
 import courseAPI.DataBase;
 import courseAPI.domain.Feature;
+import jxl.Cell;
 
 public class TagFeature implements Tag {
 
@@ -25,5 +29,14 @@ public class TagFeature implements Tag {
 		feature.setAttributeNode(name);
 
 		return feature;
+	}
+	
+	public List<Cell> getXlsCells(Object o, int colInitial, int rowInitial) {
+		List<Cell> cells = new ArrayList<Cell>();
+		/**
+		 * @TODO
+		 * implement this 
+		 */
+		return cells;
 	}
 }

@@ -1,5 +1,8 @@
 package courseAPI.api;
 
+import java.util.ArrayList;
+import java.util.List;
+
 import org.w3c.dom.Attr;
 import org.w3c.dom.Document;
 import org.w3c.dom.Element;
@@ -7,6 +10,7 @@ import org.w3c.dom.Element;
 import courseAPI.DataBase;
 import courseAPI.domain.Building;
 import courseAPI.domain.Room;
+import jxl.Cell;
 
 public class TagRoom implements Tag {
 
@@ -37,6 +41,15 @@ public class TagRoom implements Tag {
 		room.setAttributeNode(numberOfPlaces);
 		
 		return room;
-		}	
+	}	
 
+	
+	public List<Cell> getXlsCells(Object o, int colInitial, int rowInitial) {
+		List<Cell> cells = new ArrayList<Cell>();
+		/**
+		 * @TODO
+		 * implement this 
+		 */
+		return cells;
+	}
 }

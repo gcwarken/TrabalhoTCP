@@ -1,5 +1,8 @@
 package courseAPI.api;
 
+import java.util.ArrayList;
+import java.util.List;
+
 import org.w3c.dom.Attr;
 import org.w3c.dom.Document;
 import org.w3c.dom.Node;
@@ -9,6 +12,7 @@ import org.w3c.dom.Element;
 import courseAPI.DataBase;
 import courseAPI.domain.Building;
 import courseAPI.domain.Course;
+import jxl.Cell;
 
 public final class TagBuilding implements Tag {
 
@@ -45,7 +49,16 @@ public final class TagBuilding implements Tag {
 		return building;
 		}	
 		
+		public List<Cell> getXlsCells(Object o, int colInitial, int rowInitial) {
+			List<Cell> cells = new ArrayList<Cell>();
+			/**
+			 * @TODO
+			 * implement this 
+			 */
+			return cells;
+		}
 		
+	
 //		//Get all the transaction elements and then loop over them
 //	    NodeList transaction = doc.getElementsByTagName("transaction");
 //	    for(int j = 0; j < transaction.getLength(); j++) {

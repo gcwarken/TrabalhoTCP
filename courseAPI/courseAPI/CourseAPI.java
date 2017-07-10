@@ -11,7 +11,7 @@ import courseAPI.domain.*;
 public class CourseAPI {
 
 	public static void main(String[] args) throws Exception {
-		/*
+
 //	    if(args.length == 0)
 //	    {
 //	        System.out.println("Para usar a API corretamente digite: java courseAPI inputFile");
@@ -21,7 +21,9 @@ public class CourseAPI {
 		
 		//String inputFileName = "DemandasRecursos.xml";
 		String inputFileName = "test.xml";
+
 		DataBase db = new DataBase();
+
 				
 		Leitor l = new Leitor(inputFileName);
 		Document dom = l.getFileInfo();
@@ -32,15 +34,13 @@ public class CourseAPI {
 		
 		System.out.println(dom.getDocumentElement().getNodeName());
 		
-		System.out.println(eElement.getElementsByTagName("string").item(1));
+		System.out.println(eElement.getElementsByTagName("string").item(0));
+//		
+		
+//		TagBuilding.fillDataBase(dom, db);
 		
 		
-//		TagBuilding.fillDataBase(dom, db);*/
 		
-		
-		
-		//creating a data base filled
-		DataBase db = new DataBase();
 		
 		//adding features		
 		Feature f1 = new Feature(1,"computador");
@@ -84,17 +84,5 @@ public class CourseAPI {
 		e.createXml();
 		e.createXls();
 		System.out.println("falous");
-		
-		
-		
-		
-		
-		
-		
-		
-		
-		
-		
-		
 	}
 }
