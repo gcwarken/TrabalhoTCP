@@ -6,6 +6,7 @@ import java.util.List;
 import org.w3c.dom.Attr;
 import org.w3c.dom.Document;
 import org.w3c.dom.Element;
+import org.w3c.dom.NodeList;
 
 import courseAPI.DataBase;
 import courseAPI.domain.Building;
@@ -15,7 +16,7 @@ import jxl.Cell;
 public class TagRoom implements Tag {
 
 	
-	public static void fillDataBase(Document d, DataBase db) {
+	public static void fillDataBase(NodeList n, DataBase db) {
 
 	}
 	

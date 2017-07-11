@@ -10,6 +10,7 @@ import jxl.write.Number;
 import org.w3c.dom.Attr;
 import org.w3c.dom.Document;
 import org.w3c.dom.Element;
+import org.w3c.dom.NodeList;
 
 import courseAPI.DataBase;
 
@@ -19,7 +20,7 @@ import courseAPI.domain.Group;
 
 public class TagGroup implements Tag {
 
-	public static void fillDataBase(Document d, DataBase db) {
+	public static void fillDataBase(NodeList n, DataBase db) {
 
 	}
 	

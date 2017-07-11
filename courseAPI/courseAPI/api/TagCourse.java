@@ -9,6 +9,7 @@ import jxl.write.Label;
 import org.w3c.dom.Attr;
 import org.w3c.dom.Document;
 import org.w3c.dom.Element;
+import org.w3c.dom.NodeList;
 
 import courseAPI.DataBase;
 import courseAPI.domain.Course;
@@ -53,7 +54,7 @@ public class TagCourse implements Tag {
 		return cells;
 	}
 	
-	public static void fillDataBase(Document d, DataBase db) {
+	public static void fillDataBase(NodeList n, DataBase db) {
 
 	}
 

@@ -1,5 +1,7 @@
 package courseAPI.api;
 
+import courseAPI.DataBase;
+
 import javax.xml.parsers.DocumentBuilderFactory;
 import javax.xml.parsers.ParserConfigurationException;
 import javax.xml.parsers.DocumentBuilder;
@@ -16,22 +18,25 @@ public class Leitor {
 	
 	private String inputFileName;
 	private File inputFile;
-	//private DataBase apiDB;
+	private DataBase db;
 	
-	public Leitor(String _inputFileName) {
+	public Leitor(String _inputFileName, DataBase _db) {
 		inputFileName = _inputFileName;
+		db = _db;
 		inputFile = new File(inputFileName);	
 	}
 		
 	public Document getFileInfo() throws ParserConfigurationException {
 		Document doc = null;
-		String extension = inputFileName.substring(inputFileName.lastIndexOf(".") + 1, inputFileName.length());
+		String extension = inputFileName.substring(inputFileName.lastIndexOf(".") + 1, inputFileName.length()); 
 		
 		if (extension.equals("xml")) {
 			doc = readXml();
 		}
 		else System.out.println("Invalid input file");
-			
+		
+		callTags(doc);
+		
 		return doc;
 	}
 
@@ -46,35 +51,52 @@ public class Leitor {
 			e.printStackTrace();
 		}
 	    
-	    quickTest(doc);
+	    //quickTest(doc); 
 	    return doc;
 	}
 	
+	private void callTags(Document doc) {
+		// add Features
+		NodeList nlFeatures = doc.getElementsByTagName("feature");
+		TagFeature.fillDataBase(nlFeatures, this.db);
+		
+		// add Buildings
+		
+		// add Courses
+	}
+	
+	
+	///////////////////////////////////////////////////////////////////////////////////////////////////////////
+	// this won't really be used, but it was the simplest way to understand how to navigate the freaking DOM //
+	///////////////////////////////////////////////////////////////////////////////////////////////////////////
+	@SuppressWarnings("unused")
 	private void quickTest(Document doc) {
 		System.out.println("Root element: " + doc.getDocumentElement().getNodeName()); // allocation
 		
 		NodeList nCourses = doc.getElementsByTagName("course");
 
 		for (int i = 0; i < nCourses.getLength(); i++) {
-			Node nCourse = nCourses.item(i);
-			System.out.println("\nCurrent Element: " + nCourse.getNodeName());
-						
-		    Element eCourse = (Element) nCourse;
-		
-		    System.out.println("Course name: " + eCourse .getAttribute("name"));
-		    System.out.println("Course id: " + eCourse.getAttribute("id"));
-		    
-		    NodeList nGroups = nCourse.getChildNodes();
-		    
-		    for (int j = 0; j < nGroups.getLength(); j++) {
-			    if (nGroups.item(j).getNodeType() == Node.ELEMENT_NODE) {
-			        Element eGroup = (Element) nGroups.item(j);
-			        System.out.println("\tGroup id: " + eGroup.getAttribute("id"));
-			        System.out.println("\t\tGroup " + eGroup.getAttribute("id") + " teacher: " + eGroup.getAttribute("teacher"));
-			        System.out.println("\t\tGroup " + eGroup.getAttribute("id") + " number of students: " + eGroup.getAttribute("number_of_students"));
+			if (nCourses.item(i).getNodeType() == Node.ELEMENT_NODE) {
+				Node nCourse = nCourses.item(i);
+				System.out.println("\nCurrent Element: " + nCourse.getNodeName());
+			
+			    Element eCourse = (Element) nCourse;
+			
+			    System.out.println("Course name: " + eCourse .getAttribute("name"));
+			    System.out.println("Course id: " + eCourse.getAttribute("id"));
+			    
+			    NodeList nGroups = nCourse.getChildNodes();
+			    
+			    for (int j = 0; j < nGroups.getLength(); j++) {
+				    if (nGroups.item(j).getNodeType() == Node.ELEMENT_NODE) {
+				        Element eGroup = (Element) nGroups.item(j);
+				        System.out.println("\tGroup id: " + eGroup.getAttribute("id"));
+				        System.out.println("\t\tGroup " + eGroup.getAttribute("id") + " teacher: " + eGroup.getAttribute("teacher"));
+				        System.out.println("\t\tGroup " + eGroup.getAttribute("id") + " number of students: " + eGroup.getAttribute("number_of_students"));
+				    }
 			    }
-		    }
+			}
 		}
 	}
-	
+
 }
