@@ -25,7 +25,7 @@ public class CourseAPI {
 		DataBase db = new DataBase();
 				
 		Leitor l = new Leitor(inputFileName, db);
-		Document doc = l.getFileInfo();
+		l.getFileInfo();
 		
 		
 		

@@ -26,7 +26,7 @@ public class Leitor {
 		inputFile = new File(inputFileName);	
 	}
 		
-	public Document getFileInfo() throws ParserConfigurationException {
+	public void getFileInfo() throws ParserConfigurationException {
 		Document doc = null;
 		String extension = inputFileName.substring(inputFileName.lastIndexOf(".") + 1, inputFileName.length()); 
 		
@@ -37,7 +37,7 @@ public class Leitor {
 		
 		callTags(doc);
 		
-		return doc;
+		//quickTest(doc);
 	}
 
 	private Document readXml() throws ParserConfigurationException {
@@ -61,10 +61,12 @@ public class Leitor {
 		TagFeature.fillDataBase(nlFeatures, this.db);
 		
 		// add Buildings
-		NodeList nlBuildings= doc.getElementsByTagName("building");
+		NodeList nlBuildings = doc.getElementsByTagName("building");
 		TagBuilding.fillDataBase(nlBuildings, this.db);
 		
 		// add Courses
+		NodeList nlCourses = doc.getElementsByTagName("course");
+		TagCourse.fillDataBase(nlCourses, this.db);
 	}
 	
 	

@@ -37,12 +37,12 @@ public final class TagBuilding implements Tag {
 			    
 				Building b = new Building(buildingId, rooms);
 				db.addBuilding(b);
-				System.out.println("Added building " + eBuilding.getAttribute("id"));
+				//System.out.println("Added building " + eBuilding.getAttribute("id"));
 			}
 		}
 	}
 	
-	public Element getElement(Object o, Document doc){
+	public Element getElement(Object o, Document doc) {
 			
 		Building bObj = (Building) o;
 		
