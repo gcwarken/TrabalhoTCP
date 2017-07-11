@@ -37,11 +37,9 @@ public class TagGroup implements Tag {
 		        String groupTeacher = eGroup.getAttribute("teacher");
 		        int groupNumStudents = Integer.parseInt(eGroup.getAttribute("number_of_students"));
 		        
-		        List<Session> sessions = new ArrayList<Session>();
-		        /**
-		         * @TODO
-		         * implement add sessions to groups
-		         */
+		        NodeList nlSessions = (nl.item(i)).getChildNodes();
+		        List<Session> sessions = TagSession.fillDataBase(nlSessions, db);
+		        
 		        Group g = new Group(groupId, groupTeacher, groupNumStudents, sessions);
 		        groups.add(g); 
 		        

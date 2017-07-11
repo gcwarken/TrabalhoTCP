@@ -36,7 +36,7 @@ public class TagCourse implements Tag {
 								
 				// add rooms
 			    NodeList nlGroups = (nl.item(i)).getChildNodes();
-			    List<Group>groups = TagGroup.fillDataBase(nlGroups, db);
+			    List<Group> groups = TagGroup.fillDataBase(nlGroups, db);
 			    
 			    Course c = new Course(courseName, courseId, groups);
 				db.addCourse(c);

@@ -10,16 +10,39 @@ import jxl.write.Number;
 import org.w3c.dom.Attr;
 import org.w3c.dom.Document;
 import org.w3c.dom.Element;
+import org.w3c.dom.Node;
 import org.w3c.dom.NodeList;
 
 import courseAPI.DataBase;
 import courseAPI.domain.Group;
+import courseAPI.domain.Room;
 import courseAPI.domain.Session;
 
 public class TagSession implements Tag {
 
-	public static void fillDataBase(NodeList nl, DataBase db) {
+	public static List<Session> fillDataBase(NodeList nl, DataBase db) {
+		//	<session room_id='' duration='120' building_id='' weekday='2' start_time='13:30'/> 
+		List<Session> sessions = new ArrayList<Session>();
+		for (int i = 0; i < nl.getLength(); i++) {
+		    if (nl.item(i).getNodeType() == Node.ELEMENT_NODE) {
 
+		    	Element eSession = (Element) nl.item(i);
+		    	int sessionDuration = 0;
+		        try {
+		        	sessionDuration = Integer.parseInt(eSession.getAttribute("duration"));
+		        } catch (NumberFormatException e) {
+		        	sessionDuration = -1;
+		        }
+		        int sessionStartTime = Integer.parseInt((eSession.getAttribute("start_time")).replace(":", ""));
+		        int sessionWeekday = Integer.parseInt(eSession.getAttribute("weekday"));
+		        		        
+		        Session s = new Session(sessionDuration, sessionStartTime, sessionWeekday);
+		        sessions.add(s); 
+		        
+		        System.out.println("\t\tAdded session on weekday " + eSession.getAttribute("weekday") + " at " + sessionStartTime + ", session duration = " + sessionDuration);
+		    }
+	    }
+		return sessions;
 	}
 	
 	public Element getElement(Object o, Document doc) {

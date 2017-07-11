@@ -14,6 +14,12 @@ public class Session {
 		this.weekday = day;
 	}
 	
+	public Session(int duration, int time, int day) {
+		this.sessionDuration = duration;
+		this.startTime = time;
+		this.weekday = day;
+	}
+	
 	public Room getSessionRoom() {
 		return sessionRoom;
 	}
