@@ -43,7 +43,7 @@ public class TagGroup implements Tag {
 		        Group g = new Group(groupId, groupTeacher, groupNumStudents, sessions);
 		        groups.add(g); 
 		        
-		        System.out.println("\tAdded group " + groupId + ", teacher " + groupTeacher + ", num students = " + eGroup.getAttribute("number_of_students"));
+		        //System.out.println("\tAdded group " + groupId + ", teacher " + groupTeacher + ", num students = " + eGroup.getAttribute("number_of_students"));
 		    }
 	    }
 		return groups;

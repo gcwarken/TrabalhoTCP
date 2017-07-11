@@ -39,7 +39,12 @@ public class TagSession implements Tag {
 		        Session s = new Session(sessionDuration, sessionStartTime, sessionWeekday);
 		        sessions.add(s); 
 		        
-		        System.out.println("\t\tAdded session on weekday " + eSession.getAttribute("weekday") + " at " + sessionStartTime + ", session duration = " + sessionDuration);
+		        /**
+		         * @TODO
+		         * implement room addition for sessions
+		         */
+		        
+		        //System.out.println("\t\tAdded session on weekday " + eSession.getAttribute("weekday") + " at " + sessionStartTime + ", session duration = " + sessionDuration);
 		    }
 	    }
 		return sessions;

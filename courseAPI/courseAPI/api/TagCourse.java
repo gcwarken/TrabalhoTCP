@@ -40,7 +40,8 @@ public class TagCourse implements Tag {
 			    
 			    Course c = new Course(courseName, courseId, groups);
 				db.addCourse(c);
-				System.out.println("Added course " + courseName);
+				
+				//System.out.println("Added course " + courseName);
 			}
 		}
 		
