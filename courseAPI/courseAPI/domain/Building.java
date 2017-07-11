@@ -5,29 +5,28 @@ import java.util.List;
 
 public class Building {
 	
-	private Integer id;
+	private String id;
 	private List<Room> rooms;
 	
-	public Building(int _id) {
+	public Building(String _id) {
 		this.id = _id;
 		this.rooms = new ArrayList<Room>();
 	}
 	
-	public Building(int _id, List<Room> r) {
+	public Building(String _id, List<Room> r) {
 		this.id = _id;
 		this.rooms = new ArrayList<Room>();
 		this.rooms.addAll(r);
 	}
 	
 	
-	public Integer getId() {
+	public String getId() {
 		return id;
 	}
 	
 	public List<Room> getRooms(){
 		return rooms;
 	}
-	
 }
 
 /*

@@ -20,7 +20,7 @@ import courseAPI.domain.Group;
 
 public class TagGroup implements Tag {
 
-	public static void fillDataBase(NodeList n, DataBase db) {
+	public static void fillDataBase(NodeList nl, DataBase db) {
 
 	}
 	

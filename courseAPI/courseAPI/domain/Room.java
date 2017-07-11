@@ -5,27 +5,25 @@ import java.util.List;
 
 public class Room {
 
-	private Integer id;
+	private String id;
 	private List<Feature> features;
 	private Integer capacity;
 	private boolean available = true;
 	
-	public Room(int _id, int _capacity) {
+	public Room(String _id, int _capacity) {
 		this.id = _id;
 		this.features = new ArrayList<Feature>();
 		this.capacity = _capacity;
 	}
 	
-	public Room(int _id, int _capacity, List<Feature> f) {
+	public Room(String _id, int _capacity, List<Feature> f) {
 		this.id = _id;
 		this.features = new ArrayList<Feature>();
 		this.features.addAll(f);
 		this.capacity = _capacity;
-		
-		
 	}
 	
-	public Integer getId() {
+	public String getId() {
 		return id;
 	}
 	
@@ -44,10 +42,7 @@ public class Room {
 	public List<Feature> getFeatures(){
 		return features;
 	}
-	
-	
-	
-	
+
 }
 
 /*

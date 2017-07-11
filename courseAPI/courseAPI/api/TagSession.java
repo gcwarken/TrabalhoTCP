@@ -18,7 +18,7 @@ import courseAPI.domain.Session;
 
 public class TagSession implements Tag {
 
-	public static void fillDataBase(NodeList n, DataBase db) {
+	public static void fillDataBase(NodeList nl, DataBase db) {
 
 	}
 	

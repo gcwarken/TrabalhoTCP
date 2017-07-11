@@ -61,6 +61,8 @@ public class Leitor {
 		TagFeature.fillDataBase(nlFeatures, this.db);
 		
 		// add Buildings
+		NodeList nlBuildings= doc.getElementsByTagName("building");
+		TagBuilding.fillDataBase(nlBuildings, this.db);
 		
 		// add Courses
 	}

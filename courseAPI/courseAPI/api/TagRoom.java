@@ -6,6 +6,7 @@ import java.util.List;
 import org.w3c.dom.Attr;
 import org.w3c.dom.Document;
 import org.w3c.dom.Element;
+import org.w3c.dom.Node;
 import org.w3c.dom.NodeList;
 
 import courseAPI.DataBase;
@@ -15,9 +16,24 @@ import jxl.Cell;
 
 public class TagRoom implements Tag {
 
-	
-	public static void fillDataBase(NodeList n, DataBase db) {
-
+	public static List<Room> fillDataBase(NodeList nl, DataBase db) {
+		// <room id='ANFV (Anfiteatro Vermelho)' feature_ids='3, 5, 8' number_of_places='76'></room>
+		List<Room> rooms = new ArrayList<Room>();
+	    for (int i = 0; i < nl.getLength(); i++) {
+		    if (nl.item(i).getNodeType() == Node.ELEMENT_NODE) {
+		        Element eRoom = (Element) nl.item(i);
+		        String roomId = eRoom.getAttribute("id");
+		        int roomCapacity = Integer.parseInt(eRoom.getAttribute("number_of_places"));
+		        Room r = new Room(roomId, roomCapacity);
+		        rooms.add(r); 
+		        /**
+		         * @TODO
+		         * implement add features to rooms
+		         */
+		        System.out.println("\tAdded room " + eRoom.getAttribute("id") + ", capacity: " + eRoom.getAttribute("number_of_places"));
+		    }
+	    }
+		return rooms;
 	}
 	
 	public Element getElement(Object o, Document doc) {

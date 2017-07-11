@@ -19,8 +19,8 @@ public class CourseAPI {
 //	    }
 //		String inputFileName = args[0];
 		
-		//String inputFileName = "DemandasRecursos.xml";
-		String inputFileName = "test.xml";
+		String inputFileName = "DemandasRecursos.xml";
+		//String inputFileName = "test.xml";
 
 		DataBase db = new DataBase();
 				
@@ -72,6 +72,6 @@ public class CourseAPI {
 //		Escritor e = new Escritor("saida", db);
 //		e.createXml();
 //		e.createXls();
-		System.out.println("falous");
+		System.out.println("\nfalous");
 	}
 }

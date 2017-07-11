@@ -29,8 +29,7 @@ public class TagFeature implements Tag {
 				int featureId = Integer.parseInt(eFeature.getAttribute("id"));
 				Feature f = new Feature(featureId, featureName);
 				db.addFeature(f);
-				
-				System.out.println("Added feature " + eFeature.getAttribute("id") + ", " + featureName);
+				//System.out.println("Added feature " + eFeature.getAttribute("id") + ", " + featureName);
 			}
 		}
 	}
