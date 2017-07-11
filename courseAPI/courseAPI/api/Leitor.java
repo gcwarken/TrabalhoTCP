@@ -36,10 +36,11 @@ public class Leitor {
 		else System.out.println("Invalid input file");
 		
 		callTags(doc);
-		
-		//quickTest(doc);
 	}
 
+	/////////////////////////////////////////
+	// parse input xml into a DOM document //
+	/////////////////////////////////////////
 	private Document readXml() throws ParserConfigurationException {
 	    DocumentBuilderFactory dbFactory = DocumentBuilderFactory.newInstance();
 	    DocumentBuilder dBuilder = dbFactory.newDocumentBuilder();
@@ -55,6 +56,9 @@ public class Leitor {
 	    return doc;
 	}
 	
+	///////////////////////////////////////////////////////////////////////////////////////////////////////
+	// Call Tag methods in a coordinated way to fill database with information provided by the input xml //
+	///////////////////////////////////////////////////////////////////////////////////////////////////////
 	private void callTags(Document doc) {
 		// add Features
 		NodeList nlFeatures = doc.getElementsByTagName("feature");

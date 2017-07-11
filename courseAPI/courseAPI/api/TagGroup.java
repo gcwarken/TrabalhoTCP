@@ -10,6 +10,7 @@ import jxl.write.Number;
 import org.w3c.dom.Attr;
 import org.w3c.dom.Document;
 import org.w3c.dom.Element;
+import org.w3c.dom.Node;
 import org.w3c.dom.NodeList;
 
 import courseAPI.DataBase;
@@ -17,11 +18,37 @@ import courseAPI.DataBase;
 import courseAPI.DataBase;
 import courseAPI.domain.Course;
 import courseAPI.domain.Group;
+import courseAPI.domain.Room;
+import courseAPI.domain.Session;
 
 public class TagGroup implements Tag {
 
-	public static void fillDataBase(NodeList nl, DataBase db) {
+	public static List<Group> fillDataBase(NodeList nl, DataBase db) {
+		//	<group number_of_students='30' teacher='ANA LUCIA CETERTICH BAZZAN, RAFAEL HEITOR BORDINI' id='U'>
+		//		<session room_id='' duration='240' building_id='' weekday='5' start_time='13:30'/>
+		//	</group>		
+		
+		List<Group> groups = new ArrayList<Group>();
+		for (int i = 0; i < nl.getLength(); i++) {
+		    if (nl.item(i).getNodeType() == Node.ELEMENT_NODE) {
 
+		    	Element eGroup = (Element) nl.item(i);
+		        String groupId = eGroup.getAttribute("id");
+		        String groupTeacher = eGroup.getAttribute("teacher");
+		        int groupNumStudents = Integer.parseInt(eGroup.getAttribute("number_of_students"));
+		        
+		        List<Session> sessions = new ArrayList<Session>();
+		        /**
+		         * @TODO
+		         * implement add sessions to groups
+		         */
+		        Group g = new Group(groupId, groupTeacher, groupNumStudents, sessions);
+		        groups.add(g); 
+		        
+		        System.out.println("\tAdded group " + groupId + ", teacher " + groupTeacher + ", num students = " + eGroup.getAttribute("number_of_students"));
+		    }
+	    }
+		return groups;
 	}
 	
 	public Element getElement(Object o, Document doc) {

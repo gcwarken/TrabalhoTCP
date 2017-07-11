@@ -31,7 +31,7 @@ public class TagRoom implements Tag {
 		         * implement add features to rooms
 		         */
 		        
-		        //System.out.println("\tAdded room " + eRoom.getAttribute("id") + ", capacity: " + eRoom.getAttribute("number_of_places"));
+		        //System.out.println("\tAdded room " + roomId + ", capacity: " + eRoom.getAttribute("number_of_places"));
 		    }
 	    }
 		return rooms;
