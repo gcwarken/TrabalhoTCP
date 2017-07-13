@@ -5,8 +5,8 @@ public class Feature {
 	private String name;
 	
 	public Feature(int _id, String _name) {
-		this.id = _id;
-		this.name = _name;
+		id = _id;
+		name = _name;
 	}
 	
 	public Integer getId() {
