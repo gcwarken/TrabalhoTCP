@@ -19,13 +19,14 @@ import jxl.Cell;
 public final class TagBuilding implements Tag {
 
 
-	public static void fillDataBase(NodeList nl, DataBase db) {
+	public static List<Building> fillDataBase(NodeList nl) {
 		//	<building id='43412(65)'>
 		//		<room id='ANFV (Anfiteatro Vermelho)' feature_ids='3, 5, 8' number_of_places='76'></room>
 		//		<room available_for_allocation='false' id='214' feature_ids='4, 5' number_of_places='15'></room>
 		//		<room available_for_allocation='false' id='216' feature_ids='4, 5' number_of_places='15'></room>
 		//	</building>
 		
+		List<Building> buildings = new ArrayList<Building>();
 		for (int i = 0; i < nl.getLength(); i++) {
 			if (nl.item(i).getNodeType() == Node.ELEMENT_NODE) {
 				Element eBuilding =  (Element) nl.item(i);
@@ -36,10 +37,11 @@ public final class TagBuilding implements Tag {
 			    List<Room>rooms = TagRoom.fillDataBase(nlRooms, db);
 			    
 				Building b = new Building(buildingId, rooms);
-				db.addBuilding(b);
+				buildings.add(b);
 				//System.out.println("Added building " + eBuilding.getAttribute("id"));
 			}
 		}
+		return buildings;
 	}
 	
 	public Element getElement(Object o, Document doc) {
