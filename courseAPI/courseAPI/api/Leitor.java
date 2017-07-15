@@ -65,17 +65,17 @@ public class Leitor {
 	private void callTags(Document doc) {
 		// add Features
 		NodeList nlFeatures = doc.getElementsByTagName("feature");
-		List<Feature> f = TagFeature.fillDataBase(nlFeatures);
+		List<Feature> f = TagFeature.createObjectList(nlFeatures);
 		this.db.addFeatureList(f);
 		
 		// add Buildings
 		NodeList nlBuildings = doc.getElementsByTagName("building");
-		List<Building> b = TagBuilding.fillDataBase(nlBuildings);
+		List<Building> b = TagBuilding.createObjectList(nlBuildings);
 		this.db.addBuildingList(b);
 		
 		// add Courses
 		NodeList nlCourses = doc.getElementsByTagName("course");
-		List<Course> c = TagCourse.fillDataBase(nlCourses);
+		List<Course> c = TagCourse.createObjectList(nlCourses);
 		this.db.addCourseList(c);
 	}
 	

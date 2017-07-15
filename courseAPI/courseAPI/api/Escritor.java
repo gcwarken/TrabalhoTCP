@@ -62,7 +62,7 @@ public class Escritor{
 			Element course = doc.createElement("course");
 			for(i = 0; i<apiDB.getCourses().size(); i++)
 			{
-				course = tag.getElement(apiDB.getCourses().get(i), doc);
+				course = tag.createElement(apiDB.getCourses().get(i), doc);
 				courses.appendChild(course);				
 			}
 			
@@ -71,7 +71,7 @@ public class Escritor{
 			Element feature = doc.createElement("feature");
 			for(i = 0; i<apiDB.getFeatures().size(); i++)
 			{
-				feature = tag.getElement(apiDB.getFeatures().get(i), doc);
+				feature = tag.createElement(apiDB.getFeatures().get(i), doc);
 				features.appendChild(feature);
 			}
 			
@@ -80,7 +80,7 @@ public class Escritor{
 			Element building = doc.createElement("building");
 			for(i = 0; i<apiDB.getBuildings().size(); i++)
 			{
-				building = tag.getElement(apiDB.getBuildings().get(i), doc);
+				building = tag.createElement(apiDB.getBuildings().get(i), doc);
 				buildings.appendChild(building);
 			}
 			

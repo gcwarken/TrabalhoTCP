@@ -7,8 +7,8 @@ import jxl.*;
 
 public interface Tag {
 	
-	public static List<Object> fillDataBase(NodeList nl) {}
-	public Element getElement(Object o, Document doc);
+	public static List<Object> createObjectList(NodeList nl) {}
+	public Element createElement(Object o, Document doc);
 	public List<Cell> getXlsCells(Object o, int colInitial, int rowInitial);
 	
 }

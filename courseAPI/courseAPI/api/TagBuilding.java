@@ -16,7 +16,7 @@ import jxl.Cell;
 public final class TagBuilding implements Tag {
 
 
-	public static List<Building> fillDataBase(NodeList nl) {
+	public static List<Building> createObjectList(NodeList nl) {
 		//	<building id='43412(65)'>
 		//		<room id='ANFV (Anfiteatro Vermelho)' feature_ids='3, 5, 8' number_of_places='76'></room>
 		//		<room available_for_allocation='false' id='214' feature_ids='4, 5' number_of_places='15'></room>
@@ -31,7 +31,7 @@ public final class TagBuilding implements Tag {
 								
 				// add rooms
 			    NodeList nlRooms = (nl.item(i)).getChildNodes();
-			    List<Room>rooms = TagRoom.fillDataBase(nlRooms);
+			    List<Room>rooms = TagRoom.createObjectList(nlRooms);
 			    
 			    Building b = new Building(buildingId, rooms);
 				buildings.add(b);
@@ -41,7 +41,7 @@ public final class TagBuilding implements Tag {
 		return buildings;
 	}
 	
-	public Element getElement(Object o, Document doc) {
+	public Element createElement(Object o, Document doc) {
 			
 		Building bObj = (Building) o;
 		
@@ -54,7 +54,7 @@ public final class TagBuilding implements Tag {
 		Tag tag = new TagRoom();
 		Element room = doc.createElement("room");
 		for(i = 0; i<bObj.getRooms().size(); i++){
-			room = tag.getElement(bObj.getRooms().get(i), doc);
+			room = tag.createElement(bObj.getRooms().get(i), doc);
 			building.appendChild(room);	
 		}
 		return building;

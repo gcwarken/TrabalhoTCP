@@ -14,7 +14,7 @@ import jxl.Cell;
 
 public class TagRoom implements Tag {
 
-	public static List<Room> fillDataBase(NodeList nl) {
+	public static List<Room> createObjectList(NodeList nl) {
 		// <room id='ANFV (Anfiteatro Vermelho)' feature_ids='3, 5, 8' number_of_places='76'></room>
 		List<Room> rooms = new ArrayList<Room>();
 	    for (int i = 0; i < nl.getLength(); i++) {
@@ -35,7 +35,7 @@ public class TagRoom implements Tag {
 		return rooms;
 	}
 	
-	public Element getElement(Object o, Document doc) {
+	public Element createElement(Object o, Document doc) {
 		
 		Room rObj = (Room) o;
 		

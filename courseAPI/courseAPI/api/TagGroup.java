@@ -18,7 +18,7 @@ import courseAPI.domain.Session;
 
 public class TagGroup implements Tag {
 
-	public static List<Group> fillDataBase(NodeList nl) {
+	public static List<Group> createObjectList(NodeList nl) {
 		//	<group number_of_students='30' teacher='ANA LUCIA CETERTICH BAZZAN, RAFAEL HEITOR BORDINI' id='U'>
 		//		<session room_id='' duration='240' building_id='' weekday='5' start_time='13:30'/>
 		//	</group>		
@@ -33,7 +33,7 @@ public class TagGroup implements Tag {
 		        int groupNumStudents = Integer.parseInt(eGroup.getAttribute("number_of_students"));
 		        
 		        NodeList nlSessions = (nl.item(i)).getChildNodes();
-		        List<Session> sessions = TagSession.fillDataBase(nlSessions);
+		        List<Session> sessions = TagSession.createObjectList(nlSessions);
 		        
 		        Group g = new Group(groupId, groupTeacher, groupNumStudents, sessions);
 		        groups.add(g); 
@@ -44,7 +44,7 @@ public class TagGroup implements Tag {
 		return groups;
 	}
 	
-	public Element getElement(Object o, Document doc) {
+	public Element createElement(Object o, Document doc) {
 		Group groupObj = (Group) o;
 		
 		Element group = doc.createElement("Group");
@@ -60,7 +60,7 @@ public class TagGroup implements Tag {
 		int i;
 		Tag tag = new TagSession();
 		for(i = 0; i<groupObj.getGroupSessions().size(); i++) {
-			Element session = tag.getElement(groupObj.getGroupSessions().get(i), doc);
+			Element session = tag.createElement(groupObj.getGroupSessions().get(i), doc);
 			group.appendChild(session);		
 		}
 		

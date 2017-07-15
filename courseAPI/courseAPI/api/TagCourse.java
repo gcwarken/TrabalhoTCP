@@ -17,7 +17,7 @@ import courseAPI.domain.Group;
 
 public class TagCourse implements Tag {
 	
-	public static List<Course> fillDataBase(NodeList nl) {
+	public static List<Course> createObjectList(NodeList nl) {
 		//	<course name='AGENTES AUTÔNOMOS E SISTEMAS MULTIAGENTES' id='INF05019'>
 		//		<group number_of_students='30' teacher='ANA LUCIA CETERTICH BAZZAN, RAFAEL HEITOR BORDINI' id='U'>
 		//			<session room_id='' duration='240' building_id='' weekday='5' start_time='13:30'/>
@@ -34,7 +34,7 @@ public class TagCourse implements Tag {
 								
 				// add rooms
 			    NodeList nlGroups = (nl.item(i)).getChildNodes();
-			    List<Group> groups = TagGroup.fillDataBase(nlGroups);
+			    List<Group> groups = TagGroup.createObjectList(nlGroups);
 			    
 			    Course c = new Course(courseName, courseId, groups);
 				courses.add(c);
@@ -46,7 +46,7 @@ public class TagCourse implements Tag {
 		return courses;
 	}
 	
-	public Element getElement(Object o, Document doc){
+	public Element createElement(Object o, Document doc){
 	
 		Course courseObj = (Course) o;
 		
@@ -61,7 +61,7 @@ public class TagCourse implements Tag {
 		Tag tag = new TagGroup();
 		Element group = doc.createElement("group");
 		for(i = 0; i<courseObj.getGroups().size(); i++) {
-			group = tag.getElement(courseObj.getGroups().get(i), doc);
+			group = tag.createElement(courseObj.getGroups().get(i), doc);
 			course.appendChild(group);		
 		}
 		 

@@ -16,7 +16,7 @@ import jxl.Cell;
 
 public class TagFeature implements Tag {
 
-	public static List<Feature> fillDataBase(NodeList nl) {
+	public static List<Feature> createObjectList(NodeList nl) {
 		//	    <features>
 		//			<feature name='Laboratório de ensino' id='1'/>
 		//			<feature name='Laboratório de ensino de hardware' id='2'/>
@@ -38,7 +38,7 @@ public class TagFeature implements Tag {
 		return features;
 	}
 	
-	public Element getElement(Object o, Document doc) {
+	public Element createElement(Object o, Document doc) {
 		Feature featureObj = (Feature) o;
 		
 		Element feature = doc.createElement("feature");

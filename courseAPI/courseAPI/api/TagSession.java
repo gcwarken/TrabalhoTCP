@@ -16,7 +16,7 @@ import courseAPI.domain.Session;
 
 public class TagSession implements Tag {
 
-	public static List<Session> fillDataBase(NodeList nl) {
+	public static List<Session> createObjectList(NodeList nl) {
 		//	<session room_id='' duration='120' building_id='' weekday='2' start_time='13:30'/> 
 		List<Session> sessions = new ArrayList<Session>();
 		for (int i = 0; i < nl.getLength(); i++) {
@@ -46,7 +46,7 @@ public class TagSession implements Tag {
 		return sessions;
 	}
 	
-	public Element getElement(Object o, Document doc) {
+	public Element createElement(Object o, Document doc) {
 		Session sObj = (Session) o;
 		
 		Element session = doc.createElement("Session");
