@@ -3,6 +3,8 @@ package courseAPI.api;
 import java.util.ArrayList;
 import java.util.List;
 
+import courseAPI.domain.Session;
+
 import jxl.Cell;
 import jxl.write.Number;
 
@@ -12,22 +14,12 @@ import org.w3c.dom.Element;
 import org.w3c.dom.Node;
 import org.w3c.dom.NodeList;
 
-import courseAPI.domain.Room;
-import courseAPI.domain.Session;
 
 
 public class TagSession implements Tag {
 
 	public static List<Session> createObjectList(NodeList nl) {
 		//	<session duration='' requires_building_id='' features_ids='1' requires_room_id='ANFA (Anfiteatro Azul)' weekday='1' start_time='13:30'/>
-
-		//	private Room sessionRoom;
-		//	private Integer sessionDuration;
-		//	private Integer	startTime;
-		//	private Integer weekday;
-		//	private String featuresRequired = "";
-		//	private String roomRequired = "";
-		
 		List<Session> sessions = new ArrayList<Session>();
 		for (int i = 0; i < nl.getLength(); i++) {
 		    if (nl.item(i).getNodeType() == Node.ELEMENT_NODE) {
@@ -46,7 +38,6 @@ public class TagSession implements Tag {
 		        sessionReqFeatures.concat(eSession.getAttribute("features_ids"));
 		        sessionReqRoom.concat(eSession.getAttribute("requires_room_id"));
 		        		        
-		        // public Session(int duration, int time, int day, String features, String roomReq)
 		        Session s = new Session(sessionDuration, sessionStartTime, sessionWeekday, sessionReqFeatures, sessionReqRoom);
 		        sessions.add(s); 
 		        

@@ -1,12 +1,6 @@
 package courseAPI;
 
-import java.util.ArrayList;
-import java.util.List;
-
-import org.w3c.dom.*;
-
 import courseAPI.api.*; 
-import courseAPI.domain.*;
 
 public class CourseAPI {
 
@@ -14,7 +8,7 @@ public class CourseAPI {
 
 //	    if(args.length == 0)
 //	    {
-//	        System.out.println("Para usar a API corretamente digite: java courseAPI inputFile");
+//	        System.out.println("Para usar a API corretamente digite: java courseAPI \"inputFile\"");
 //	        System.exit(0);
 //	    }
 //		String inputFileName = args[0];
@@ -27,10 +21,9 @@ public class CourseAPI {
 		Leitor l = new Leitor(inputFileName, db);
 		l.getFileInfo();
 		
-		
-		
-		
-		
+		Alocador alocador = new Alocador(db);
+		alocador.alocar();
+				
 //		//adding features		
 //		Feature f1 = new Feature(1,"computador");
 //		Feature f2 = new Feature(2,"projetor");
@@ -72,6 +65,7 @@ public class CourseAPI {
 //		Escritor e = new Escritor("saida", db);
 //		e.createXml();
 //		e.createXls();
+		
 		System.out.println("\nfalous");
 	}
 }
