@@ -44,6 +44,10 @@ public class Session {
 		return featuresRequired;
 	}
 	
+	public String getRoomRequired() {
+		return roomRequired;
+	}
+	
 	public boolean checkFeatureRequirement() {
 		return (this.featuresRequired != "");
 	}
