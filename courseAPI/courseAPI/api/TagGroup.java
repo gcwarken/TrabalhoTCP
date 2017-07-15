@@ -13,17 +13,12 @@ import org.w3c.dom.Element;
 import org.w3c.dom.Node;
 import org.w3c.dom.NodeList;
 
-import courseAPI.DataBase;
-
-import courseAPI.DataBase;
-import courseAPI.domain.Course;
 import courseAPI.domain.Group;
-import courseAPI.domain.Room;
 import courseAPI.domain.Session;
 
 public class TagGroup implements Tag {
 
-	public static List<Group> fillDataBase(NodeList nl, DataBase db) {
+	public static List<Group> fillDataBase(NodeList nl) {
 		//	<group number_of_students='30' teacher='ANA LUCIA CETERTICH BAZZAN, RAFAEL HEITOR BORDINI' id='U'>
 		//		<session room_id='' duration='240' building_id='' weekday='5' start_time='13:30'/>
 		//	</group>		
@@ -38,7 +33,7 @@ public class TagGroup implements Tag {
 		        int groupNumStudents = Integer.parseInt(eGroup.getAttribute("number_of_students"));
 		        
 		        NodeList nlSessions = (nl.item(i)).getChildNodes();
-		        List<Session> sessions = TagSession.fillDataBase(nlSessions, db);
+		        List<Session> sessions = TagSession.fillDataBase(nlSessions);
 		        
 		        Group g = new Group(groupId, groupTeacher, groupNumStudents, sessions);
 		        groups.add(g); 

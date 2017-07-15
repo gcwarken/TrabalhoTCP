@@ -4,7 +4,6 @@ import java.util.ArrayList;
 import java.util.List;
 
 import jxl.Cell;
-import jxl.write.Label;
 import jxl.write.Number;
 
 import org.w3c.dom.Attr;
@@ -12,15 +11,12 @@ import org.w3c.dom.Document;
 import org.w3c.dom.Element;
 import org.w3c.dom.Node;
 import org.w3c.dom.NodeList;
-
-import courseAPI.DataBase;
-import courseAPI.domain.Group;
-import courseAPI.domain.Room;
 import courseAPI.domain.Session;
+
 
 public class TagSession implements Tag {
 
-	public static List<Session> fillDataBase(NodeList nl, DataBase db) {
+	public static List<Session> fillDataBase(NodeList nl) {
 		//	<session room_id='' duration='120' building_id='' weekday='2' start_time='13:30'/> 
 		List<Session> sessions = new ArrayList<Session>();
 		for (int i = 0; i < nl.getLength(); i++) {

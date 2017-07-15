@@ -9,10 +9,7 @@ import org.w3c.dom.Node;
 import org.w3c.dom.NodeList;
 import org.w3c.dom.Element;
 
-import courseAPI.DataBase;
 import courseAPI.domain.Building;
-import courseAPI.domain.Course;
-import courseAPI.domain.Feature;
 import courseAPI.domain.Room;
 import jxl.Cell;
 
@@ -34,9 +31,9 @@ public final class TagBuilding implements Tag {
 								
 				// add rooms
 			    NodeList nlRooms = (nl.item(i)).getChildNodes();
-			    List<Room>rooms = TagRoom.fillDataBase(nlRooms, db);
+			    List<Room>rooms = TagRoom.fillDataBase(nlRooms);
 			    
-				Building b = new Building(buildingId, rooms);
+			    Building b = new Building(buildingId, rooms);
 				buildings.add(b);
 				//System.out.println("Added building " + eBuilding.getAttribute("id"));
 			}

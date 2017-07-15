@@ -1,5 +1,7 @@
 package courseAPI.api;
 
+
+
 import java.util.ArrayList;
 import java.util.List;
 
@@ -9,29 +11,31 @@ import org.w3c.dom.Element;
 import org.w3c.dom.Node;
 import org.w3c.dom.NodeList;
 
-import courseAPI.DataBase;
 import courseAPI.domain.Feature;
 import jxl.Cell;
 
 public class TagFeature implements Tag {
 
-	public static void fillDataBase(NodeList nl, DataBase db) {
+	public static List<Feature> fillDataBase(NodeList nl) {
 		//	    <features>
 		//			<feature name='Laboratório de ensino' id='1'/>
 		//			<feature name='Laboratório de ensino de hardware' id='2'/>
 		//			<feature name='Som e microfone' id='3' hidden='true'/>
 		//      </features>		
 
+		List<Feature> features = new ArrayList<Feature>();
+		
 		for (int i = 0; i < nl.getLength(); i++) {
 			if (nl.item(i).getNodeType() == Node.ELEMENT_NODE) {
 				Element eFeature =  (Element) nl.item(i);
 				String featureName = eFeature.getAttribute("name");
 				int featureId = Integer.parseInt(eFeature.getAttribute("id"));
 				Feature f = new Feature(featureId, featureName);
-				db.addFeature(f);
+				features.add(f);
 				//System.out.println("Added feature " + eFeature.getAttribute("id") + ", " + featureName);
 			}
 		}
+		return features;
 	}
 	
 	public Element getElement(Object o, Document doc) {

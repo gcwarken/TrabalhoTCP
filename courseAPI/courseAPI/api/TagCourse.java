@@ -12,21 +12,19 @@ import org.w3c.dom.Element;
 import org.w3c.dom.Node;
 import org.w3c.dom.NodeList;
 
-import courseAPI.DataBase;
-import courseAPI.domain.Building;
 import courseAPI.domain.Course;
 import courseAPI.domain.Group;
-import courseAPI.domain.Room;
 
 public class TagCourse implements Tag {
 	
-	public static void fillDataBase(NodeList nl, DataBase db) {
+	public static List<Course> fillDataBase(NodeList nl) {
 		//	<course name='AGENTES AUTÔNOMOS E SISTEMAS MULTIAGENTES' id='INF05019'>
 		//		<group number_of_students='30' teacher='ANA LUCIA CETERTICH BAZZAN, RAFAEL HEITOR BORDINI' id='U'>
 		//			<session room_id='' duration='240' building_id='' weekday='5' start_time='13:30'/>
 		//		</group>
 		//	</course>
 		
+		List<Course> courses = new ArrayList<Course>();
 		for (int i = 0; i < nl.getLength(); i++) {
 			if (nl.item(i).getNodeType() == Node.ELEMENT_NODE) {
 				Element eCourse =  (Element) nl.item(i);
@@ -36,16 +34,16 @@ public class TagCourse implements Tag {
 								
 				// add rooms
 			    NodeList nlGroups = (nl.item(i)).getChildNodes();
-			    List<Group> groups = TagGroup.fillDataBase(nlGroups, db);
+			    List<Group> groups = TagGroup.fillDataBase(nlGroups);
 			    
 			    Course c = new Course(courseName, courseId, groups);
-				db.addCourse(c);
+				courses.add(c);
 				
 				//System.out.println("Added course " + courseName);
 			}
 		}
 		
-		
+		return courses;
 	}
 	
 	public Element getElement(Object o, Document doc){

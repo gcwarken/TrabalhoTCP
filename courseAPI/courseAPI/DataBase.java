@@ -16,9 +16,9 @@ public class DataBase {
 	
 	public DataBase() {
 	//	this.teachers = new ArrayList<>();
-		this.buildings = new ArrayList<Building>();
-		this.courses = new ArrayList<Course>();
-		this.features = new ArrayList<Feature>();
+		buildings = new ArrayList<Building>();
+		courses = new ArrayList<Course>();
+		features = new ArrayList<Feature>();
 	//	this.groups = new ArrayList<>();
 	//	this.rooms = new ArrayList<>();
 	//	this.sessions = new ArrayList<>();
@@ -35,14 +35,30 @@ public class DataBase {
 		this.buildings.add(b);
 		return 0;
 	}
+	
+	public int addBuildingList(List<Building> b) {
+		this.buildings.addAll(b);
+		return 0;
+	}
 
 	public int addCourse(Course c) {
 		this.courses.add(c);
 		return 0;
 	}
 
+	public int addCourseList(List<Course> c) {
+		this.courses.addAll(c);
+		return 0;
+	}
+	
+	
 	public int addFeature(Feature f) {
 		this.features.add(f);
+		return 0;
+	}
+	
+	public int addFeatureList(List<Feature> f) {
+		this.features.addAll(f);
 		return 0;
 	}
 	

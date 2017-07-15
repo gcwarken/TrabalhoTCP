@@ -9,14 +9,12 @@ import org.w3c.dom.Element;
 import org.w3c.dom.Node;
 import org.w3c.dom.NodeList;
 
-import courseAPI.DataBase;
-import courseAPI.domain.Building;
 import courseAPI.domain.Room;
 import jxl.Cell;
 
 public class TagRoom implements Tag {
 
-	public static List<Room> fillDataBase(NodeList nl, DataBase db) {
+	public static List<Room> fillDataBase(NodeList nl) {
 		// <room id='ANFV (Anfiteatro Vermelho)' feature_ids='3, 5, 8' number_of_places='76'></room>
 		List<Room> rooms = new ArrayList<Room>();
 	    for (int i = 0; i < nl.getLength(); i++) {

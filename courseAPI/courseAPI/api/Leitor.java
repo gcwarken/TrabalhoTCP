@@ -1,6 +1,7 @@
 package courseAPI.api;
 
 import courseAPI.DataBase;
+import courseAPI.domain.*;
 
 import javax.xml.parsers.DocumentBuilderFactory;
 import javax.xml.parsers.ParserConfigurationException;
@@ -12,6 +13,8 @@ import org.w3c.dom.NodeList;
 import org.xml.sax.SAXException;
 import java.io.File;
 import java.io.IOException;
+import java.util.List;
+
 
 
 public class Leitor {
@@ -62,15 +65,18 @@ public class Leitor {
 	private void callTags(Document doc) {
 		// add Features
 		NodeList nlFeatures = doc.getElementsByTagName("feature");
-		TagFeature.fillDataBase(nlFeatures, this.db);
+		List<Feature> f = TagFeature.fillDataBase(nlFeatures);
+		this.db.addFeatureList(f);
 		
 		// add Buildings
 		NodeList nlBuildings = doc.getElementsByTagName("building");
-		TagBuilding.fillDataBase(nlBuildings, this.db);
+		List<Building> b = TagBuilding.fillDataBase(nlBuildings);
+		this.db.addBuildingList(b);
 		
 		// add Courses
 		NodeList nlCourses = doc.getElementsByTagName("course");
-		TagCourse.fillDataBase(nlCourses, this.db);
+		List<Course> c = TagCourse.fillDataBase(nlCourses);
+		this.db.addCourseList(c);
 	}
 	
 	
