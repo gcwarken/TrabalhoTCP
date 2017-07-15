@@ -11,17 +11,29 @@ import org.w3c.dom.Document;
 import org.w3c.dom.Element;
 import org.w3c.dom.Node;
 import org.w3c.dom.NodeList;
+
+import courseAPI.domain.Room;
 import courseAPI.domain.Session;
 
 
 public class TagSession implements Tag {
 
 	public static List<Session> createObjectList(NodeList nl) {
-		//	<session room_id='' duration='120' building_id='' weekday='2' start_time='13:30'/> 
+		//	<session duration='' requires_building_id='' features_ids='1' requires_room_id='ANFA (Anfiteatro Azul)' weekday='1' start_time='13:30'/>
+
+		//	private Room sessionRoom;
+		//	private Integer sessionDuration;
+		//	private Integer	startTime;
+		//	private Integer weekday;
+		//	private String featuresRequired = "";
+		//	private String roomRequired = "";
+		
 		List<Session> sessions = new ArrayList<Session>();
 		for (int i = 0; i < nl.getLength(); i++) {
 		    if (nl.item(i).getNodeType() == Node.ELEMENT_NODE) {
-
+		    	String sessionReqFeatures = "";
+		    	String sessionReqRoom = "";
+		    	
 		    	Element eSession = (Element) nl.item(i);
 		    	int sessionDuration = 0;
 		        try {
@@ -31,8 +43,11 @@ public class TagSession implements Tag {
 		        }
 		        int sessionStartTime = Integer.parseInt((eSession.getAttribute("start_time")).replace(":", ""));
 		        int sessionWeekday = Integer.parseInt(eSession.getAttribute("weekday"));
+		        sessionReqFeatures.concat(eSession.getAttribute("features_ids"));
+		        sessionReqRoom.concat(eSession.getAttribute("requires_room_id"));
 		        		        
-		        Session s = new Session(sessionDuration, sessionStartTime, sessionWeekday);
+		        // public Session(int duration, int time, int day, String features, String roomReq)
+		        Session s = new Session(sessionDuration, sessionStartTime, sessionWeekday, sessionReqFeatures, sessionReqRoom);
 		        sessions.add(s); 
 		        
 		        /**

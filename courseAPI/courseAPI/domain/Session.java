@@ -18,10 +18,12 @@ public class Session {
 		roomRequired = roomReq;
 	}
 	
-	public Session(int duration, int time, int day) {
+	public Session(int duration, int time, int day, String features, String roomReq) {
 		this.sessionDuration = duration;
 		this.startTime = time;
 		this.weekday = day;
+		this.featuresRequired = features;
+		this.roomRequired = roomReq;
 	}
 	
 	public Room getSessionRoom() {
