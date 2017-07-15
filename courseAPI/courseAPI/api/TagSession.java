@@ -77,7 +77,7 @@ public class TagSession implements Tag {
 		Session session = (Session) o;
 		List<Cell> cells = new ArrayList<Cell>();
 		
-		Number roomId = new Number(colInitial++, rowInitial, session.getSessionRoom().getId());
+		Number roomId = new Number(colInitial++, rowInitial, Integer.parseInt(session.getSessionRoom().getId()));
 		cells.add(roomId);
 		Number duration = new Number(colInitial++, rowInitial, session.getSessionDuration());
 		cells.add(duration);
