@@ -35,7 +35,7 @@ public class TagRoom implements Tag {
 		return rooms;
 	}
 	
-	public Element createElement(Object o, Document doc) {
+	public Element createNewElements(Object o, Document doc) {
 		
 		Room rObj = (Room) o;
 		

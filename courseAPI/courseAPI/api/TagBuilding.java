@@ -41,7 +41,7 @@ public final class TagBuilding implements Tag {
 		return buildings;
 	}
 	
-	public Element createElement(Object o, Document doc) {
+	public Element createNewElements(Object o, Document doc) {
 			
 		Building bObj = (Building) o;
 		
@@ -54,7 +54,7 @@ public final class TagBuilding implements Tag {
 		Tag tag = new TagRoom();
 		Element room = doc.createElement("room");
 		for(i = 0; i<bObj.getRooms().size(); i++){
-			room = tag.createElement(bObj.getRooms().get(i), doc);
+			room = tag.createNewElements(bObj.getRooms().get(i), doc);
 			building.appendChild(room);	
 		}
 		return building;

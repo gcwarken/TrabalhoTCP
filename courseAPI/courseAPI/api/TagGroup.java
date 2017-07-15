@@ -44,7 +44,7 @@ public class TagGroup implements Tag {
 		return groups;
 	}
 	
-	public Element createElement(Object o, Document doc) {
+	public Element createNewElements(Object o, Document doc) {
 		Group groupObj = (Group) o;
 		
 		Element group = doc.createElement("Group");
@@ -60,7 +60,7 @@ public class TagGroup implements Tag {
 		int i;
 		Tag tag = new TagSession();
 		for(i = 0; i<groupObj.getGroupSessions().size(); i++) {
-			Element session = tag.createElement(groupObj.getGroupSessions().get(i), doc);
+			Element session = tag.createNewElements(groupObj.getGroupSessions().get(i), doc);
 			group.appendChild(session);		
 		}
 		

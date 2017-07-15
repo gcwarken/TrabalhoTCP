@@ -38,7 +38,7 @@ public class TagFeature implements Tag {
 		return features;
 	}
 	
-	public Element createElement(Object o, Document doc) {
+	public Element createNewElements(Object o, Document doc) {
 		Feature featureObj = (Feature) o;
 		
 		Element feature = doc.createElement("feature");

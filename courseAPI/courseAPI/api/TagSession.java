@@ -46,7 +46,7 @@ public class TagSession implements Tag {
 		return sessions;
 	}
 	
-	public Element createElement(Object o, Document doc) {
+	public Element createNewElements(Object o, Document doc) {
 		Session sObj = (Session) o;
 		
 		Element session = doc.createElement("Session");

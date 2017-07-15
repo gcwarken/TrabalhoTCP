@@ -46,7 +46,7 @@ public class TagCourse implements Tag {
 		return courses;
 	}
 	
-	public Element createElement(Object o, Document doc){
+	public Element createNewElements(Object o, Document doc){
 	
 		Course courseObj = (Course) o;
 		
@@ -61,7 +61,7 @@ public class TagCourse implements Tag {
 		Tag tag = new TagGroup();
 		Element group = doc.createElement("group");
 		for(i = 0; i<courseObj.getGroups().size(); i++) {
-			group = tag.createElement(courseObj.getGroups().get(i), doc);
+			group = tag.createNewElements(courseObj.getGroups().get(i), doc);
 			course.appendChild(group);		
 		}
 		 
