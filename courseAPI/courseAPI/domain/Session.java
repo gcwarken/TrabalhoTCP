@@ -6,12 +6,16 @@ public class Session {
 	private Integer sessionDuration;
 	private Integer	startTime;
 	private Integer weekday;
+	private String featuresRequired = "";
+	private String roomRequired = "";
 	
-	public Session(Room room, int duration, int time, int day) {
-		this.sessionRoom = room;
-		this.sessionDuration = duration;
-		this.startTime = time;
-		this.weekday = day;
+	public Session(Room room, int duration, int time, int day, String features, String roomReq) {
+		sessionRoom = room;
+		sessionDuration = duration;
+		startTime = time;
+		weekday = day;
+		featuresRequired = features;
+		roomRequired = roomReq;
 	}
 	
 	public Session(int duration, int time, int day) {
@@ -34,6 +38,18 @@ public class Session {
 	
 	public Integer getWeekday() {
 		return weekday;
+	}
+	
+	public String getFeaturesRequired() {
+		return featuresRequired;
+	}
+	
+	public boolean checkFeatureRequirement() {
+		return (this.featuresRequired != "");
+	}
+	
+	public boolean checkRoomRequirement() {
+		return (this.roomRequired != ""); 
 	}
 	
 }
