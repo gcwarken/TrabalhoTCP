@@ -1,5 +1,7 @@
 package courseAPI.domain;
 
+import java.util.Arrays;
+
 public class RoomAvailability {
 	private boolean[][] schedule;	
 	private int days = 6;
@@ -7,7 +9,10 @@ public class RoomAvailability {
 	
 	public RoomAvailability() {
 		this.schedule = new boolean[this.days][this.hours];
-		this.initialize();
+		
+		// fill scheduel with true = all slots available 
+		for (boolean[] row: this.schedule) 
+			Arrays.fill(row, true);
 		
 //		schedule:
 //					|0		|1		|2		|3		|4		|5
@@ -39,21 +44,8 @@ public class RoomAvailability {
 	}
 		
 	protected void notAvailable() {
-		int i, j;
-		for (i = 0; i < this.days; i++){
-			for (j = 0; j < this.hours; j++) {
-				this.schedule[i][j] = false;
-			}
-		}
-	}
-	
-	private void initialize() {
-		int i, j;
-		for (i = 0; i < this.days; i++){
-			for (j = 0; j < this.hours; j++) {
-				this.schedule[i][j] = true;
-			}
-		}
+		for (boolean[] row: this.schedule) 
+			Arrays.fill(row, false);
 	}
 	
 	private int convertDay(int d) {
