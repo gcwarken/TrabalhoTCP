@@ -16,6 +16,12 @@ public class Course {
 		this.groups.addAll(groups);		
 	}
 	
+	public Course(String name, String id){
+		this.courseName = name;
+		this.courseId = id;
+		this.groups = new ArrayList<Group>();	
+	}
+	
 	public String getCourseName(){
 		return courseName;
 	}

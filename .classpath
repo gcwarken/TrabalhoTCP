@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <classpath>
-	<classpathentry kind="src" path="courseAPI"/>
+	<classpathentry kind="src" path="src"/>
 	<classpathentry kind="con" path="org.eclipse.jdt.launching.JRE_CONTAINER"/>
-	<classpathentry kind="lib" path="/TrabalhoTCP/jexcelapi/jxl.jar"/>
+	<classpathentry kind="lib" path="C:/Users/rods-pc/Desktop/ecp/etapa 4/Técnicas de Construção de Programas/TP01/TrabalhoTCP/jexcelapi/jxl.jar"/>
 	<classpathentry kind="output" path="bin"/>
 </classpath>

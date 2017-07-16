@@ -3,6 +3,7 @@ package courseAPI.domain;
 public class Session {
 
 	private Room sessionRoom;
+	private Group sessionGroup;
 	private String sessionBuildingId;
 	private Integer sessionDuration;
 	private Integer	startTime;
@@ -31,8 +32,16 @@ public class Session {
 		return sessionRoom;
 	}
 	
+	public Group getSessionGroup() {
+		return sessionGroup;
+	}
+	
 	public void setSessionRoom(Room r) {
 		this.sessionRoom = r;
+	}
+	
+	public void setSessionGroup(Group g) {
+		this.sessionGroup = g;
 	}
 	
 	public String getSessionBuildingId() {

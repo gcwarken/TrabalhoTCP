@@ -7,6 +7,7 @@ public class Group {
 
 	private String groupId;
 	private String groupTeacher;
+	private Course groupCourse;
 	private Integer numStudents;
 	private List<Session> groupSessions;
 	
@@ -20,6 +21,14 @@ public class Group {
 	
 	public String getGroupId() {
 		return groupId;
+	}
+	
+	public Course getGroupId() {
+		return groupCourse;
+	}
+	
+	public void setGroupCourse(Course c) {
+		this.groupCourse = c;
 	}
 
 	public String getGroupTeacher() {
