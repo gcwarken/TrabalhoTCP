@@ -19,7 +19,7 @@ import courseAPI.domain.Session;
 public class TagGroup implements Tag {
 
 	public static List<Group> createObjectList(NodeList nl) {
-		//	<group number_of_students='30' teacher='ANA LUCIA CETERTICH BAZZAN, RAFAEL HEITOR BORDINI' id='U'>
+		//	<group number_of_students='30' teacher='ANA LUCIA CETERTICH BAZZAN, RAFAEL HEITOR BORDINI' id='A, B, C'>
 		//		<session room_id='' duration='240' building_id='' weekday='5' start_time='13:30'/>
 		//	</group>		
 		
@@ -28,7 +28,8 @@ public class TagGroup implements Tag {
 		    if (nl.item(i).getNodeType() == Node.ELEMENT_NODE) {
 
 		    	Element eGroup = (Element) nl.item(i);
-		        String groupId = eGroup.getAttribute("id");
+		    	
+		        String groupId = eGroup.getAttribute("id").replace(" ", "");
 		        String groupTeacher = eGroup.getAttribute("teacher");
 		        int groupNumStudents = Integer.parseInt(eGroup.getAttribute("number_of_students"));
 		        

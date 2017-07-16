@@ -17,10 +17,3 @@ public class Feature {
 		return name;
 	}
 }
-
-/*
-feature:
-	name
-	id
-	hidden (true/false)
-*/

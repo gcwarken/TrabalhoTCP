@@ -22,14 +22,14 @@ public class TagRoom implements Tag {
 		        Element eRoom = (Element) nl.item(i);
 		        String roomId = eRoom.getAttribute("id");
 		        int roomCapacity = Integer.parseInt(eRoom.getAttribute("number_of_places"));
-		        Room r = new Room(roomId, roomCapacity);
-		        rooms.add(r); 
-		        /**
-		         * @TODO
-		         * implement add features to rooms
-		         */
+		        String roomFeatures = (eRoom.getAttribute("feature_ids")).replace(" ", "");
+		        
+		        Room r = new Room(roomId, roomCapacity, roomFeatures);
+		        if (eRoom.getAttribute("available_for_allocation").equals("false"))
+		        	r.notAvailable();  
 		        
 		        //System.out.println("\tAdded room " + roomId + ", capacity: " + eRoom.getAttribute("number_of_places"));
+		        rooms.add(r);
 		    }
 	    }
 		return rooms;
@@ -44,12 +44,7 @@ public class TagRoom implements Tag {
 		Attr featureIds = doc.createAttribute("feature_ids");
 		Attr numberOfPlaces = doc.createAttribute("nuber_of_spaces");
 		id.setValue(rObj.getId().toString());
-		int i;
-		String features = null;
-		for(i = 0; i<rObj.getFeatures().size(); i++) {
-			features = features + ", " +  rObj.getFeatures().get(i);
-		}
-		featureIds.setValue(features);
+		featureIds.setValue(rObj.getFeatures());
 		numberOfPlaces.setValue(rObj.getCapacity().toString());
 		room.setAttributeNode(id);
 		room.setAttributeNode(featureIds);

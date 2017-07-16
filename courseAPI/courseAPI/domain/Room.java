@@ -1,25 +1,15 @@
 package courseAPI.domain;
 
-import java.util.ArrayList;
-import java.util.List;
-
 public class Room {
 
 	private String id;
-	private List<Feature> features;
+	private String features;
 	private Integer capacity;
-	private boolean available = true;
+	private RoomAvailability availability = new RoomAvailability();
 	
-	public Room(String _id, int _capacity) {
+	public Room(String _id, int _capacity, String _features) {
 		this.id = _id;
-		this.features = new ArrayList<Feature>();
-		this.capacity = _capacity;
-	}
-	
-	public Room(String _id, int _capacity, List<Feature> f) {
-		this.id = _id;
-		this.features = new ArrayList<Feature>();
-		this.features.addAll(f);
+		this.features = _features;
 		this.capacity = _capacity;
 	}
 	
@@ -30,25 +20,20 @@ public class Room {
 	public Integer getCapacity() {
 		return capacity;
 	}
-
-	public void updateAvailability(boolean b) {
-		available = b;
-	}
 	
-	public boolean getAvailability() {
-		return available;
-	}
-	
-	public List<Feature> getFeatures(){
+	public String getFeatures(){
 		return features;
 	}
 
+	public void notAvailable() {
+		this.availability.notAvailable();
+	}
+	
+	public boolean getAvailability(int d, int h) {
+		return this.availability.getAvailability(d, h); 
+	}
+	
+	public void setAvailability(int d, int h, boolean b) {
+		this.availability.setAvailability(d, h, b);
+	}
 }
-
-/*
-room:
-	id
-	feature_ids
-	number_of_places
-	available_for_allocation (true/false)
-*/
