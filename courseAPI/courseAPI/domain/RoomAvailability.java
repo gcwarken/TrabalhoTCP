@@ -29,15 +29,15 @@ public class RoomAvailability {
 //		15	22h30	|_______|_______|_______|_______|_______|_______|
 	}
 	
-	public boolean getAvailability(int d, int h) {
+	protected boolean getAvailability(int d, int h) {
 		return this.schedule[this.convertDay(d)][this.convertHour(h)]; 
 	}
 	
-	public void setAvailability(int d, int h, boolean b) {
+	protected void setAvailability(int d, int h, boolean b) {
 		this.schedule[this.convertDay(d)][this.convertHour(h)] = b;
 	}
 	
-	public void notAvailable() {
+	protected void notAvailable() {
 		int i, j;
 		for (i = 0; i < this.days; i++){
 			for (j = 0; j < this.hours; j++) {
