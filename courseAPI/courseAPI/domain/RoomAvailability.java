@@ -7,7 +7,8 @@ public class RoomAvailability {
 	
 	public RoomAvailability() {
 		this.schedule = new boolean[this.days][this.hours];
-//		boolean array defaults to false		
+		this.initialize();
+		
 //		schedule:
 //					|0		|1		|2		|3		|4		|5
 //					|seg____|ter____|qua____|qui____|sex____|sab____
@@ -36,12 +37,21 @@ public class RoomAvailability {
 	protected void setAvailability(int d, int h, boolean b) {
 		this.schedule[this.convertDay(d)][this.convertHour(h)] = b;
 	}
-	
+		
 	protected void notAvailable() {
 		int i, j;
 		for (i = 0; i < this.days; i++){
 			for (j = 0; j < this.hours; j++) {
 				this.schedule[i][j] = false;
+			}
+		}
+	}
+	
+	private void initialize() {
+		int i, j;
+		for (i = 0; i < this.days; i++){
+			for (j = 0; j < this.hours; j++) {
+				this.schedule[i][j] = true;
 			}
 		}
 	}

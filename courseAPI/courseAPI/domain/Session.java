@@ -30,6 +30,10 @@ public class Session {
 		return sessionRoom;
 	}
 	
+	public void setSessionRoom(Room r) {
+		this.sessionRoom = r;
+	}
+	
 	public Integer getSessionDuration() {
 		return sessionDuration;
 	}
