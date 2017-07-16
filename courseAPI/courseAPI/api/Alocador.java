@@ -47,7 +47,7 @@ public class Alocador {
 							int time = s.getStartTime();
 							for (k = 0; k < hours; k++) {
 								selectedRoom.setAvailability(s.getWeekday(), time, false);
-								time += 60;
+								time = time + 60;
 							}
 							
 							s.setSessionRoom(selectedRoom);
@@ -63,7 +63,16 @@ public class Alocador {
 	
 	private boolean checkRoomSchedule(Session s, Room r) {
 		boolean available = true;
+		int hours = s.getSessionDuration();
+		int time = s.getStartTime();
+		int i = 0;
 		
+		while (hours > 0) {
+			if (r.getAvailability(s.getWeekday(), time))
+				return false;
+			time = time + 60;
+			hours = hours - 60;
+		}
 		return available;
 	}
 	
