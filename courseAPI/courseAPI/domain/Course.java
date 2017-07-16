@@ -21,7 +21,7 @@ public class Course {
 		this.courseId = id;
 		this.groups = new ArrayList<Group>();	
 	}
-	
+		
 	public String getCourseName(){
 		return courseName;
 	}
@@ -32,5 +32,9 @@ public class Course {
 	
 	public List<Group> getGroups() {
 		return groups;
+	}
+	
+	public void addGroup(Group g) {
+		this.groups.add(g);
 	}
 }

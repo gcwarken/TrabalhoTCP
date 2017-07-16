@@ -6,11 +6,15 @@ public class Room {
 	private String features;
 	private Integer capacity;
 	private RoomAvailability availability = new RoomAvailability();
-	
+		
 	public Room(String _id, int _capacity, String _features) {
 		this.id = _id;
 		this.features = _features;
 		this.capacity = _capacity;
+	}
+	
+	public Room(String _id) {
+		this.id = _id;
 	}
 	
 	public String getId() {

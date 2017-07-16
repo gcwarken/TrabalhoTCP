@@ -1,8 +1,14 @@
-package courseAPI.domain;
+package courseAPI.api;
 
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
+
+import courseAPI.domain.Building;
+import courseAPI.domain.Course;
+import courseAPI.domain.Group;
+import courseAPI.domain.Room;
+import courseAPI.domain.Session;
 
 public class Programa {
 	ArrayList<Session> aulas;
@@ -27,10 +33,10 @@ public class Programa {
 	}
 	
 	
-	public static void main (String[] args)
+	/*public static void main (String[] args)
 	{
 		System.out.println("ola");
-	}
+	}*/
 	
 	public ArrayList<Course> getCadeiras()
 	{
@@ -48,18 +54,18 @@ public class Programa {
 		List<Session> aulasSemReq = new ArrayList<Session>();
 		
 		ArrayList<Course> cadeirasAux = new ArrayList<Course>();
-		ArrayList<Turma> turmasAux = new ArrayList<Turma>();
+		ArrayList<Group> turmasAux = new ArrayList<Group>();
 		
 		
 		for(i=0;i<aulas.size();i++)
 		{
-			if(aulas.get(i).checkFeatureRequirement() != "")
+			if(aulas.get(i).checkFeatureRequirement())
 				aulasComRequisitos.add(aulas.get(i));
 		}
 		
 		for(i=0;i<aulas.size();i++)
 		{
-			if(aulas.get(i).checkRoomRequirement() != "")
+			if(aulas.get(i).checkRoomRequirement())
 			{
 				aulasComReqroomid.add(aulas.get(i));
 			}
@@ -69,7 +75,7 @@ public class Programa {
 		
 		for(i=0;i<aulas.size();i++)
 		{
-			if(aulas.get(i).checkFeatureRequirement() == "" && aulas.get(i).checkRoomRequirement() == "")
+			if(!aulas.get(i).checkFeatureRequirement() && !aulas.get(i).checkRoomRequirement())
 				aulasSemReq.add(aulas.get(i));
 		}
 		
@@ -95,14 +101,14 @@ public class Programa {
 						int horario = aulasComReqroomid.get(i).getStartTime();
 						int duracao = aulasComReqroomid.get(i).getSessionDuration();
 						
-						if(predios.get(j).getRooms().get(x).getAvailability(diaSemana, horario) && (aulasComReqroomid.get(i).getAlunos()<=predios.get(j).getRooms().get(x).getCapacity()));
+						if(predios.get(j).getRooms().get(x).getAvailability(diaSemana, horario) && (aulasComReqroomid.get(i).getSessionGroup().getNumStudents() <=predios.get(j).getRooms().get(x).getCapacity()));
 						{
 //							System.out.println(predios.get(j).getSalas().get(x).getId() + "\n");
 //							System.out.println(aulasComReqroomid.get(i).room_id() + "\n");
 							//System.out.println(predios.get(j).getSalas().get(x).getId() + " " + predios.get(j).getId());
-							aulasComReqroomid.get(i).insereSala(predios.get(j).getRooms().get(x).getId());
-							aulasComReqroomid.get(i).inserePredio(predios.get(j).getId());
-							predios.get(j).getRooms().get(x).reservaSala(diaSemana, horario, duracao);
+							aulasComReqroomid.get(i).setSessionRoom(predios.get(j).getRooms().get(x));
+							aulasComReqroomid.get(i).setSessionBuildingId(predios.get(j).getId());
+							predios.get(j).getRooms().get(x).setAvailability(diaSemana, horario, false);
 							achou=true;
 							
 //							x=predios.get(j).getSalas().size();
@@ -123,31 +129,31 @@ public class Programa {
 			if(!achou)
 				System.out.println("Erro ROOMiD");
 			achou=false;
-			Course cadeiraAuxiliar =  new Course();
+			Course cadeiraAuxiliar =  new Course(aulasComReqroomid.get(i).getSessionGroup().getGroupCourse().getCourseName(), aulasComReqroomid.get(i).getSessionGroup().getGroupCourse().getCourseID());
 			
-			Turma turmaAuxiliar = new Turma();
+			Group turmaAuxiliar = new Group();
 			
-			cadeiraAuxiliar.setCadeira(aulasComReqroomid.get(i).getTurma().getCourse().getNome(), aulasComReqroomid.get(i).getTurma().getCadeira().getidentificador());
-			turmaAuxiliar.setId(aulasComReqroomid.get(i).getTurma().getid());
+			
+			turmaAuxiliar.setGroupId(aulasComReqroomid.get(i).getSessionGroup().getGroupId());
 			
 			for(int y=0;y<cadeirasAux.size();y++)
 			{
-				if(cadeiraAuxiliar.getidentificador().equals(cadeirasAux.get(y).getidentificador()))
+				if(cadeiraAuxiliar.getCourseID().equals(cadeirasAux.get(y).getCourseID()))
 				{
-					for(int k=0;k<cadeirasAux.get(y).getTurmas().size();k++)
+					for(int k=0;k<cadeirasAux.get(y).getGroups().size();k++)
 					{
-						if(turmaAuxiliar.getid().equals(cadeirasAux.get(y).getTurmas().get(k).getid()))
+						if(turmaAuxiliar.getGroupId().equals(cadeirasAux.get(y).getGroups().get(k).getGroupId()))
 						{
-							cadeirasAux.get(y).getTurmas().get(k).addAula(aulasComReqroomid.get(i));
+							cadeirasAux.get(y).getGroups().get(k).addGroupSession(aulasComReqroomid.get(i));
 							achouTurma=true;
 						}
 							
 					}
 					if(!achouTurma)
 					{
-						turmaAuxiliar.addAula(aulasComReqroomid.get(i));
+						turmaAuxiliar.addGroupSession(aulasComReqroomid.get(i));
 						turmasAux.add(turmaAuxiliar);
-						cadeirasAux.get(y).addTurma(turmaAuxiliar);
+						cadeirasAux.get(y).addGroup(turmaAuxiliar);
 						
 					}
 					achouTurma=false;
@@ -156,9 +162,9 @@ public class Programa {
 			}
 			if(!achouCadeira)
 			{
-				turmaAuxiliar.addAula(aulasComReqroomid.get(i));
+				turmaAuxiliar.addGroupSession(aulasComReqroomid.get(i));
 				turmasAux.add(turmaAuxiliar);
-				cadeiraAuxiliar.addTurma(turmaAuxiliar);
+				cadeiraAuxiliar.addGroup(turmaAuxiliar);
 				cadeirasAux.add(cadeiraAuxiliar);
 			}
 			achouCadeira=false;
@@ -170,29 +176,29 @@ public class Programa {
 				//System.out.println(predios.get(j).getId());
 				for (int x=0;x<predios.get(j).getRooms().size();x++)
 				{
-					if(predios.get(j).getRooms().get(x).dispo())
+					if(true)
 					{
 						int diaSemana = aulasComRequisitos.get(i).getWeekday();
 						int horario = aulasComRequisitos.get(i).getStartTime();
 						int duracao = aulasComRequisitos.get(i).getSessionDuration();
 //						if(predios.get(j).getSalas().get(x).verificaSala(diaSemana, horario,duracao))
 //								System.out.println(aulasComRequisitos.get(i).getAlunos() + " " + predios.get(j).getSalas().get(x).getCapacity());
-						if(predios.get(j).getRooms().get(x).verificaSala(diaSemana, horario,duracao))
+						if(predios.get(j).getRooms().get(x).getAvailability(diaSemana, horario))
 						{
 //							System.out.println("Achei sala");
 //							System.out.println(predios.get(j).getSalas().get(x).getRecursos().length());
-							switch(predios.get(j).getRooms().get(x).getRecursos().length())
+							switch(predios.get(j).getRooms().get(x).getFeatures().length())
 							{
 							case 1:
 								
 								//System.out.println(predios.get(j).getSalas().get(x).getRecursos().charAt(0) );
-								if(predios.get(j).getRooms().get(x).getRecursos().charAt(0) == aulasComRequisitos.get(i).getRecursos().charAt(0))
+								if(predios.get(j).getRooms().get(x).getFeatures().charAt(0) == aulasComRequisitos.get(i).getFeaturesRequired().charAt(0))
 								{
 									
 									
-									aulasComRequisitos.get(i).insereSala(predios.get(j).getRooms().get(x).getId());
-									aulasComRequisitos.get(i).inserePredio(predios.get(j).getId());
-									predios.get(j).getRooms().get(x).reservaSala(diaSemana, horario, duracao);
+									aulasComRequisitos.get(i).setSessionRoom(predios.get(j).getRooms().get(x));
+									aulasComRequisitos.get(i).setSessionBuildingId(predios.get(j).getId());
+									predios.get(j).getRooms().get(x).setAvailability(diaSemana, horario, false);
 									achou=true;
 //									x=predios.get(j).getSalas().size();
 //									j=predios.size();
@@ -200,25 +206,25 @@ public class Programa {
 								}
 								break;
 							case 4:
-								if(predios.get(j).getRooms().get(x).getRecursos().charAt(0) == aulasComRequisitos.get(i).getRecursos().charAt(0))
+								if(predios.get(j).getRooms().get(x).getFeatures().charAt(0) == aulasComRequisitos.get(i).getFeaturesRequired().charAt(0))
 								{
 									 
 									
-									aulasComRequisitos.get(i).insereSala(predios.get(j).getRooms().get(x).getId());
-									aulasComRequisitos.get(i).inserePredio(predios.get(j).getId());
-									predios.get(j).getRooms().get(x).reservaSala(diaSemana, horario, duracao);
+									aulasComRequisitos.get(i).setSessionRoom(predios.get(j).getRooms().get(x));
+									aulasComRequisitos.get(i).setSessionBuildingId(predios.get(j).getId());
+									predios.get(j).getRooms().get(x).setAvailability(diaSemana, horario, false);
 									achou=true;
 //									x=predios.get(j).getSalas().size();
 //									j=predios.size();
 									
 								}
-								else if(predios.get(j).getRooms().get(x).getRecursos().charAt(3) == aulasComRequisitos.get(i).getRecursos().charAt(0))
+								else if(predios.get(j).getRooms().get(x).getFeatures().charAt(3) == aulasComRequisitos.get(i).getFeaturesRequired().charAt(0))
 								{
 									
 									
-									aulasComRequisitos.get(i).insereSala(predios.get(j).getRooms().get(x).getId());
-									aulasComRequisitos.get(i).inserePredio(predios.get(j).getId());
-									predios.get(j).getRooms().get(x).reservaSala(diaSemana, horario, duracao);
+									aulasComRequisitos.get(i).setSessionRoom(predios.get(j).getRooms().get(x));
+									aulasComRequisitos.get(i).setSessionBuildingId(predios.get(j).getId());
+									predios.get(j).getRooms().get(x).setAvailability(diaSemana, horario, false);
 //									x=predios.get(j).getSalas().size();
 //									j=predios.size();
 									achou=true;
@@ -226,37 +232,37 @@ public class Programa {
 								}
 								break;
 							case 7:
-								if(predios.get(j).getRooms().get(x).getRecursos().charAt(0) == aulasComRequisitos.get(i).getRecursos().charAt(0))
+								if(predios.get(j).getRooms().get(x).getFeatures().charAt(0) == aulasComRequisitos.get(i).getFeaturesRequired().charAt(0))
 								{
 									 
 									
-									aulasComRequisitos.get(i).insereSala(predios.get(j).getRooms().get(x).getId());
-									aulasComRequisitos.get(i).inserePredio(predios.get(j).getId());
-									predios.get(j).getRooms().get(x).reservaSala(diaSemana, horario, duracao);
+									aulasComRequisitos.get(i).setSessionRoom(predios.get(j).getRooms().get(x));
+									aulasComRequisitos.get(i).setSessionBuildingId(predios.get(j).getId());
+									predios.get(j).getRooms().get(x).setAvailability(diaSemana, horario, false);
 //									x=predios.get(j).getSalas().size();
 //									j=predios.size();
 									achou=true;
 									
 								}
-								else if(predios.get(j).getRooms().get(x).getRecursos().charAt(3) == aulasComRequisitos.get(i).getRecursos().charAt(0))
+								else if(predios.get(j).getRooms().get(x).getFeatures().charAt(3) == aulasComRequisitos.get(i).getFeaturesRequired().charAt(0))
 								{
 									 
 									
-									aulasComRequisitos.get(i).insereSala(predios.get(j).getRooms().get(x).getId());
-									aulasComRequisitos.get(i).inserePredio(predios.get(j).getId());
-									predios.get(j).getRooms().get(x).reservaSala(diaSemana, horario, duracao);
+									aulasComRequisitos.get(i).setSessionRoom(predios.get(j).getRooms().get(x));
+									aulasComRequisitos.get(i).setSessionBuildingId(predios.get(j).getId());
+									predios.get(j).getRooms().get(x).setAvailability(diaSemana, horario, false);
 //									x=predios.get(j).getSalas().size();
 //									j=predios.size();
 									achou=true;
 									
 								}
-								else if(predios.get(j).getRooms().get(x).getRecursos().charAt(6) == aulasComRequisitos.get(i).getRecursos().charAt(0))
+								else if(predios.get(j).getRooms().get(x).getFeatures().charAt(6) == aulasComRequisitos.get(i).getFeaturesRequired().charAt(0))
 								{
 									 
 									
-									aulasComRequisitos.get(i).insereSala(predios.get(j).getRooms().get(x).getId());
-									aulasComRequisitos.get(i).inserePredio(predios.get(j).getId());
-									predios.get(j).getRooms().get(x).reservaSala(diaSemana, horario, duracao);
+									aulasComRequisitos.get(i).setSessionRoom(predios.get(j).getRooms().get(x));
+									aulasComRequisitos.get(i).setSessionBuildingId(predios.get(j).getId());
+									predios.get(j).getRooms().get(x).setAvailability(diaSemana, horario, false);
 //									x=predios.get(j).getSalas().size();
 //									j=predios.size();
 									achou=true;
@@ -275,8 +281,8 @@ public class Programa {
 			if(!achou)
 			{
 				System.out.println("Erro comREQ");
-				System.out.println(aulasComRequisitos.get(i).getTurma().getid());
-				System.out.println(aulasComRequisitos.get(i).getTurma().getCadeira().getidentificador());
+				System.out.println(aulasComRequisitos.get(i).getSessionGroup().getGroupId());
+				System.out.println(aulasComRequisitos.get(i).getSessionGroup().getGroupCourse().getCourseID());
 			}
 			else
 			{
@@ -284,31 +290,30 @@ public class Programa {
 				achou=false;
 			}
 			
-			Course cadeiraAuxiliar =  new Course();
+			Course cadeiraAuxiliar =  new Course(aulasComReqroomid.get(i).getSessionGroup().getGroupCourse().getCourseName(), aulasComReqroomid.get(i).getSessionGroup().getGroupCourse().getCourseID());
 			
-			Turma turmaAuxiliar = new Turma();
+			Group turmaAuxiliar = new Group();
 			
-			cadeiraAuxiliar.setCadeira(aulasComRequisitos.get(i).getTurma().getCadeira().getNome(), aulasComRequisitos.get(i).getTurma().getCadeira().getidentificador());
-			turmaAuxiliar.setId(aulasComRequisitos.get(i).getTurma().getid());
+			turmaAuxiliar.setGroupId(aulasComReqroomid.get(i).getSessionGroup().getGroupId());
 			
 			for(int y=0;y<cadeirasAux.size();y++)
 			{
-				if(cadeiraAuxiliar.getidentificador().equals(cadeirasAux.get(y).getidentificador()))
+				if(cadeiraAuxiliar.getCourseID().equals(cadeirasAux.get(y).getCourseID()))
 				{
-					for(int k=0;k<cadeirasAux.get(y).getTurmas().size();k++)
+					for(int k=0;k<cadeirasAux.get(y).getGroups().size();k++)
 					{
-						if(turmaAuxiliar.getid().equals(cadeirasAux.get(y).getTurmas().get(k).getid()))
+						if(turmaAuxiliar.getGroupId().equals(cadeirasAux.get(y).getGroups().get(k).getGroupId()))
 						{
-							cadeirasAux.get(y).getTurmas().get(k).addAula(aulasComRequisitos.get(i));
+							cadeirasAux.get(y).getGroups().get(k).addGroupSession(aulasComRequisitos.get(i));
 							achouTurma=true;
 						}
 							
 					}
 					if(!achouTurma)
 					{
-						turmaAuxiliar.addAula(aulasComRequisitos.get(i));
+						turmaAuxiliar.addGroupSession(aulasComRequisitos.get(i));
 						turmasAux.add(turmaAuxiliar);
-						cadeirasAux.get(y).addTurma(turmaAuxiliar);
+						cadeirasAux.get(y).addGroup(turmaAuxiliar);
 						
 					}
 					achouTurma=false;
@@ -317,9 +322,9 @@ public class Programa {
 			}
 			if(!achouCadeira)
 			{
-				turmaAuxiliar.addAula(aulasComRequisitos.get(i));
+				turmaAuxiliar.addGroupSession(aulasComRequisitos.get(i));
 				turmasAux.add(turmaAuxiliar);
-				cadeiraAuxiliar.addTurma(turmaAuxiliar);
+				cadeiraAuxiliar.addGroup(turmaAuxiliar);
 				cadeirasAux.add(cadeiraAuxiliar);
 			}
 			achouCadeira=false;
@@ -337,7 +342,7 @@ public class Programa {
 		
 		
 		
-		Collections.sort(aulasSemReq);
+		//Collections.sort((ArrayList) aulasSemReq);
 		
 //		for (int f=0; f<aulasSemReq.size(); f++)
 //		{
@@ -354,12 +359,12 @@ public class Programa {
 					int horario = aulasSemReq.get(i).getStartTime();
 					int duracao = aulasSemReq.get(i).getSessionDuration();
 					
-					if(predios.get(j).getRooms().get(x).verificaSala(diaSemana, horario, duracao) && (aulasSemReq.get(i).getAlunos()<predios.get(j).getRooms().get(x).getCapacity()))
+					if(predios.get(j).getRooms().get(x).getAvailability(diaSemana, horario) && (aulasSemReq.get(i).getSessionGroup().getNumStudents()<predios.get(j).getRooms().get(x).getCapacity()))
 					{	
 						//System.out.println(predios.get(j).getSalas().get(x).getId());
-						aulasSemReq.get(i).insereSala(predios.get(j).getRooms().get(x).getId());
-						aulasSemReq.get(i).inserePredio(predios.get(j).getId());
-						predios.get(j).getRooms().get(x).reservaSala(diaSemana, horario, duracao);
+						aulasSemReq.get(i).setSessionRoom(predios.get(j).getRooms().get(x));
+						aulasSemReq.get(i).setSessionBuildingId(predios.get(j).getId());
+						predios.get(j).getRooms().get(x).setAvailability(diaSemana, horario, false);
 //						x=predios.get(j).getSalas().size();
 //						j=predios.size();
 						achou=true;
@@ -375,33 +380,33 @@ public class Programa {
 			
 			achou=false;
 			
-			Course cadeiraAuxiliar =  new Course();
+			Course cadeiraAuxiliar =  new Course(aulasComReqroomid.get(i).getSessionGroup().getGroupCourse().getCourseName(), aulasComReqroomid.get(i).getSessionGroup().getGroupCourse().getCourseID());
 			
-			Turma turmaAuxiliar = new Turma();
+			Group turmaAuxiliar = new Group();
 			
-			cadeiraAuxiliar.setCadeira(aulasSemReq.get(i).getTurma().getCadeira().getNome(), aulasSemReq.get(i).getTurma().getCadeira().getidentificador());
-			turmaAuxiliar.setId(aulasSemReq.get(i).getTurma().getid());
+			
+			turmaAuxiliar.setGroupId(aulasComReqroomid.get(i).getSessionGroup().getGroupId());
 			achouTurma=false;
 			achouCadeira=false;
 			
 			for(int y=0;y<cadeirasAux.size();y++)
 			{
-				if(cadeiraAuxiliar.getidentificador().equals(cadeirasAux.get(y).getidentificador()))
+				if(cadeiraAuxiliar.getCourseID().equals(cadeirasAux.get(y).getCourseID()))
 				{
-					for(int k=0;k<cadeirasAux.get(y).getTurmas().size();k++)
+					for(int k=0;k<cadeirasAux.get(y).getGroups().size();k++)
 					{
-						if(turmaAuxiliar.getid().equals(cadeirasAux.get(y).getTurmas().get(k).getid()))
+						if(turmaAuxiliar.getGroupId().equals(cadeirasAux.get(y).getGroups().get(k).getGroupId()))
 						{
-							cadeirasAux.get(y).getTurmas().get(k).addAula(aulasSemReq.get(i));
+							cadeirasAux.get(y).getGroups().get(k).addGroupSession(aulasSemReq.get(i));
 							achouTurma=true;
 						}
 							
 					}
 					if(!achouTurma)
 					{
-						turmaAuxiliar.addAula(aulasSemReq.get(i));
+						turmaAuxiliar.addGroupSession(aulasSemReq.get(i));
 						turmasAux.add(turmaAuxiliar);
-						cadeirasAux.get(y).addTurma(turmaAuxiliar);
+						cadeirasAux.get(y).addGroup(turmaAuxiliar);
 						
 					}
 					achouTurma=false;
@@ -410,15 +415,15 @@ public class Programa {
 			}
 			if(!achouCadeira)
 			{
-				turmaAuxiliar.addAula(aulasSemReq.get(i));
+				turmaAuxiliar.addGroupSession(aulasSemReq.get(i));
 				turmasAux.add(turmaAuxiliar);
-				cadeiraAuxiliar.addTurma(turmaAuxiliar);
+				cadeiraAuxiliar.addGroup(turmaAuxiliar);
 				cadeirasAux.add(cadeiraAuxiliar);
 			}
 			achouCadeira=false;
 		}
 		
-		Collections.sort(cadeirasAux);
+//		Collections.sort(cadeirasAux);
 		
 //		System.out.println(cadeirasAux.size());
 //		

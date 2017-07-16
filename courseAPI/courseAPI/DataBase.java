@@ -2,7 +2,10 @@ package courseAPI;
 
 import java.util.ArrayList;
 import java.util.List;
-import courseAPI.domain.*;
+
+import courseAPI.domain.Building;
+import courseAPI.domain.Course;
+import courseAPI.domain.Feature;
 
 public class DataBase {
 	private List<Building> buildings;

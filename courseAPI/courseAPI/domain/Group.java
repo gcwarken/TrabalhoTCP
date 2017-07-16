@@ -11,6 +11,10 @@ public class Group {
 	private Integer numStudents;
 	private List<Session> groupSessions;
 	
+	public Group(){
+		
+	}
+	
 	public Group(String id, String teacher, int students, List<Session> sessions) {
 		this.groupId = id;
 		this.groupTeacher = teacher;
@@ -23,7 +27,11 @@ public class Group {
 		return groupId;
 	}
 	
-	public Course getGroupId() {
+	public void setGroupId(String s) {
+		this.groupId = s;
+	}
+	
+	public Course getGroupCourse() {
 		return groupCourse;
 	}
 	
@@ -41,5 +49,9 @@ public class Group {
 	
 	public List<Session> getGroupSessions(){
 		return groupSessions;
+	}
+	
+	public void addGroupSession(Session s){
+		this.groupSessions.add(s);
 	}
 }
