@@ -57,7 +57,7 @@ public class RoomAvailability {
 	}
 	
 	private int convertDay(int d) {
-		return d - 2;
+		return d - 1;
 	}
 	
 	private int convertHour(int h) {

@@ -1,6 +1,5 @@
 package courseAPI.api;
 
-import java.util.ArrayList;
 import java.util.List;
 import courseAPI.DataBase;
 import courseAPI.domain.*;
@@ -19,18 +18,19 @@ public class Alocador {
 	
 	public void alocar() {
 		this.alocaComRoomRequirement();
-		this.alocaComFeatureRequirement();
+		//this.alocaComFeatureRequirement();
+		//this.alocaSessionsRestantes();
 	}
 	
 
-	private boolean matchSessionAndRoom(Session s, List<Room> rList) {
+	private boolean matchSessionAndRoom(Session s) {
 		boolean roomFound = false;
 		int i, j, k; 
 		i = j = k = 0;
 
-		// run through buildings of the list
+		// loop through buildings of the list
 		while (!roomFound && i < this.buildings.size()) { 
-			// run through rooms of building(i)
+			// loop through rooms of building(i)
 			while (!roomFound && j < this.buildings.get(i).getRooms().size()) {
 				String roomId = this.buildings.get(i).getRooms().get(j).getId();
 				String roomFeatures = this.buildings.get(i).getRooms().get(j).getFeatures();
@@ -64,8 +64,8 @@ public class Alocador {
 	
 	private boolean checkRoomSchedule(Session s, Room r) {
 		boolean available = true;
-		int hours = s.getSessionDuration();
 		int time = s.getStartTime();
+		int hours = s.getSessionDuration();
 		
 		while (hours > 0) {
 			if (r.getAvailability(s.getWeekday(), time))
@@ -78,14 +78,76 @@ public class Alocador {
 	
 	private void alocaComRoomRequirement() {
 		int i, j, k;		
-		/**
-		 * @TODO
-		 * 3 nested for loops to get to a single session
-		 */
+		int batata = 0;
+		
+		// loop through courses
+		for (i = 0; i < this.courses.size(); i++) {
+			// loop through groups
+			for (j = 0; j < this.courses.get(i).getGroups().size(); j++) {
+				// loop through sessions
+				for (k = 0; k < this.courses.get(i).getGroups().get(j).getGroupSessions().size(); k++) {
+					
+					Session currentSession = this.courses.get(i).getGroups().get(j).getGroupSessions().get(k);
+					if (currentSession.checkRoomRequirement()) {
+						try {
+							this.matchSessionAndRoom(currentSession);
+							batata++;
+						} catch (ArrayIndexOutOfBoundsException e) {
+							System.out.println("broker session weekday  : " + Integer.toString(currentSession.getWeekday()) + "\nbroker session startTime: " + Integer.toString(currentSession.getStartTime()));
+							throw e;
+						}
+					} 
+				}
+			}
+		}
+		System.out.println(Integer.toString(batata) + " sessions com room requirement");
 	}
 	
 	private void alocaComFeatureRequirement() {
-		
+		int i, j, k;		
+
+		// loop through courses
+		for (i = 0; i < this.courses.size(); i++) {
+			// loop through groups
+			for (j = 0; j < this.courses.get(i).getGroups().size(); j++) {
+				// loop through sessions
+				for (k = 0; k < this.courses.get(i).getGroups().get(j).getGroupSessions().size(); k++) {
+					
+					Session currentSession = this.courses.get(i).getGroups().get(j).getGroupSessions().get(k);
+					if (currentSession.checkFeatureRequirement() && currentSession.getSessionRoom() == null) {
+						try {
+							this.matchSessionAndRoom(currentSession);
+							System.out.println("batata com features");
+						} catch (ArrayIndexOutOfBoundsException e) {
+							System.out.println("batata doce");
+						}
+					}
+				}
+			}
+		}
 	}
 	
+	private void alocaSessionsRestantes() {
+		int i, j, k;		
+
+		// loop through courses
+		for (i = 0; i < this.courses.size(); i++) {
+			// loop through groups
+			for (j = 0; j < this.courses.get(i).getGroups().size(); j++) {
+				// loop through sessions
+				for (k = 0; k < this.courses.get(i).getGroups().get(j).getGroupSessions().size(); k++) {
+					
+					Session currentSession = this.courses.get(i).getGroups().get(j).getGroupSessions().get(k);
+					if (currentSession.getSessionRoom() == null) {
+						try {
+							this.matchSessionAndRoom(currentSession);
+							System.out.println("batata");
+						} catch (ArrayIndexOutOfBoundsException e) {
+							System.out.println("batata doce");
+						}
+					}
+				}
+			}
+		}
+	}
 }

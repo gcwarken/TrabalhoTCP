@@ -11,20 +11,20 @@ public class Session {
 	private String roomRequired = "";
 	
 	public Session(Room room, int duration, int time, int day, String features, String roomReq) {
-		sessionRoom = room;
-		sessionDuration = duration;
-		startTime = time;
-		weekday = day;
-		featuresRequired = features;
-		roomRequired = roomReq;
+		this.sessionRoom = room;
+		this.sessionDuration = duration;
+		this.startTime = time;
+		this.weekday = day;
+		this.featuresRequired.concat(features);
+		this.roomRequired.concat(roomReq);
 	}
 	
 	public Session(int duration, int time, int day, String features, String roomReq) {
 		this.sessionDuration = duration;
 		this.startTime = time;
 		this.weekday = day;
-		this.featuresRequired = features;
-		this.roomRequired = roomReq;
+		this.featuresRequired.concat(features);
+		this.roomRequired.concat(roomReq);
 	}
 	
 	public Room getSessionRoom() {
@@ -64,11 +64,13 @@ public class Session {
 	}
 	
 	public boolean checkFeatureRequirement() {
-		return (this.featuresRequired != "");
+		// returns true if a feature is required
+		return !(this.featuresRequired.isEmpty());
 	}
 	
 	public boolean checkRoomRequirement() {
-		return (this.roomRequired != ""); 
+		// returns true if a room is required
+		return !(this.roomRequired.isEmpty());
 	}
 	
 }

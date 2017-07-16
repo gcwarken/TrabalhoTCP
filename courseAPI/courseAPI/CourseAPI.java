@@ -1,6 +1,9 @@
 package courseAPI;
 
-import courseAPI.api.*; 
+import courseAPI.api.*;
+import courseAPI.domain.*;
+import java.util.List;
+
 
 public class CourseAPI {
 
@@ -20,9 +23,10 @@ public class CourseAPI {
 				
 		Leitor l = new Leitor(inputFileName, db);
 		l.getFileInfo();
-//		
-//		Alocador alocador = new Alocador(db);
-//		alocador.alocar();
+	
+		
+		Alocador alocador = new Alocador(db);
+		alocador.alocar();
 				
 //		//adding features		
 //		Feature f1 = new Feature(1,"computador");

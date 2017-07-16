@@ -28,10 +28,11 @@ public class TagSession implements Tag {
 		    	
 		    	Element eSession = (Element) nl.item(i);
 		    	int sessionDuration = 0;
+		    	int defaultSessionDuration = 120;
 		        try {
 		        	sessionDuration = Integer.parseInt(eSession.getAttribute("duration"));
 		        } catch (NumberFormatException e) {
-		        	sessionDuration = -1;
+		        	sessionDuration = defaultSessionDuration;
 		        }
 		        int sessionStartTime = Integer.parseInt((eSession.getAttribute("start_time")).replace(":", ""));
 		        int sessionWeekday = Integer.parseInt(eSession.getAttribute("weekday"));
@@ -39,14 +40,7 @@ public class TagSession implements Tag {
 		        sessionReqRoom.concat(eSession.getAttribute("requires_room_id"));
 		        		        
 		        Session s = new Session(sessionDuration, sessionStartTime, sessionWeekday, sessionReqFeatures, sessionReqRoom);
-		        sessions.add(s); 
-		        
-		        /**
-		         * @TODO
-		         * implement room addition for sessions
-		         */
-		        
-		        //System.out.println("\t\tAdded session on weekday " + eSession.getAttribute("weekday") + " at " + sessionStartTime + ", session duration = " + sessionDuration);
+		        sessions.add(s);
 		    }
 	    }
 		return sessions;
