@@ -51,6 +51,7 @@ public class Alocador {
 							}
 							
 							s.setSessionRoom(selectedRoom);
+							s.setSessionBuildingId(this.buildings.get(i).getId());
 						}
 					}
 				}
@@ -65,7 +66,6 @@ public class Alocador {
 		boolean available = true;
 		int hours = s.getSessionDuration();
 		int time = s.getStartTime();
-		int i = 0;
 		
 		while (hours > 0) {
 			if (r.getAvailability(s.getWeekday(), time))
@@ -78,11 +78,10 @@ public class Alocador {
 	
 	private void alocaComRoomRequirement() {
 		int i, j, k;		
-		for (i = 0; i < this.buildings.size(); i++) {
-			for (j = 0; j < (this.buildings.get(i)).getRooms().size(); j++) {
-				
-			}
-		}
+		/**
+		 * @TODO
+		 * 3 nested for loops to get to a single session
+		 */
 	}
 	
 	private void alocaComFeatureRequirement() {

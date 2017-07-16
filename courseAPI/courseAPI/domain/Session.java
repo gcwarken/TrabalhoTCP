@@ -3,6 +3,7 @@ package courseAPI.domain;
 public class Session {
 
 	private Room sessionRoom;
+	private String sessionBuildingId;
 	private Integer sessionDuration;
 	private Integer	startTime;
 	private Integer weekday;
@@ -32,6 +33,14 @@ public class Session {
 	
 	public void setSessionRoom(Room r) {
 		this.sessionRoom = r;
+	}
+	
+	public String getSessionBuildingId() {
+		return this.sessionBuildingId;
+	}
+	
+	public void setSessionBuildingId(String bId) {
+		this.sessionBuildingId = bId;
 	}
 	
 	public Integer getSessionDuration() {
