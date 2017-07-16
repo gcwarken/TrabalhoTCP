@@ -41,10 +41,9 @@ public class RoomAvailability {
 		int i, j;
 		for (i = 0; i < this.days; i++){
 			for (j = 0; j < this.hours; j++) {
-				this.setAvailability(i, j, false);
+				this.schedule[i][j] = false;
 			}
 		}
-		
 	}
 	
 	private int convertDay(int d) {
