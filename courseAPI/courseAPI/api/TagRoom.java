@@ -28,7 +28,7 @@ public class TagRoom implements Tag {
 		        if (eRoom.getAttribute("available_for_allocation").equals("false"))
 		        	r.notAvailable();  
 		        
-		        //System.out.println("\tAdded room " + roomId + ", capacity: " + eRoom.getAttribute("number_of_places"));
+		        // System.out.println("\tAdded room with id: " + r.getId() + " and features: " + r.getFeatures());
 		        rooms.add(r);
 		    }
 	    }

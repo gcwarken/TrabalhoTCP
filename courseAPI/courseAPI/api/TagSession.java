@@ -34,7 +34,7 @@ public class TagSession implements Tag {
 		        }
 		        int sessionStartTime = Integer.parseInt((eSession.getAttribute("start_time")).replace(":", ""));
 		        int sessionWeekday = Integer.parseInt(eSession.getAttribute("weekday"));
-		        String sessionReqFeatures = eSession.getAttribute("feature_ids").isEmpty() ? "" : eSession.getAttribute("feature_ids");
+		        String sessionReqFeatures = eSession.getAttribute("feature_ids").isEmpty() ? "" : eSession.getAttribute("feature_ids").replace(",", "");
 		        String sessionReqRoom = eSession.getAttribute("requires_room_id").isEmpty() ? "" : eSession.getAttribute("requires_room_id");
 		        		        
 		        Session s = new Session(sessionDuration, sessionStartTime, sessionWeekday, sessionReqFeatures, sessionReqRoom);
