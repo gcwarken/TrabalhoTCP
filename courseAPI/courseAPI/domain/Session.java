@@ -7,24 +7,15 @@ public class Session {
 	private Integer sessionDuration;
 	private Integer	startTime;
 	private Integer weekday;
-	private String featuresRequired = "";
-	private String roomRequired = "";
-	
-	public Session(Room room, int duration, int time, int day, String features, String roomReq) {
-		this.sessionRoom = room;
-		this.sessionDuration = duration;
-		this.startTime = time;
-		this.weekday = day;
-		this.featuresRequired.concat(features);
-		this.roomRequired.concat(roomReq);
-	}
+	private String featuresRequired;
+	private String roomRequired;
 	
 	public Session(int duration, int time, int day, String features, String roomReq) {
 		this.sessionDuration = duration;
 		this.startTime = time;
 		this.weekday = day;
-		this.featuresRequired.concat(features);
-		this.roomRequired.concat(roomReq);
+		this.featuresRequired = features.isEmpty() ? "" : features;
+		this.roomRequired = roomReq.isEmpty() ? "" : roomReq;
 	}
 	
 	public Room getSessionRoom() {

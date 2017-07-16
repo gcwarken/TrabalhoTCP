@@ -18,8 +18,8 @@ public class Alocador {
 	
 	public void alocar() {
 		this.alocaComRoomRequirement();
-		//this.alocaComFeatureRequirement();
-		//this.alocaSessionsRestantes();
+		this.alocaComFeatureRequirement();
+		this.alocaSessionsRestantes();
 	}
 	
 
@@ -104,7 +104,8 @@ public class Alocador {
 	}
 	
 	private void alocaComFeatureRequirement() {
-		int i, j, k;		
+		int i, j, k;
+		int batata = 0;
 
 		// loop through courses
 		for (i = 0; i < this.courses.size(); i++) {
@@ -117,18 +118,21 @@ public class Alocador {
 					if (currentSession.checkFeatureRequirement() && currentSession.getSessionRoom() == null) {
 						try {
 							this.matchSessionAndRoom(currentSession);
-							System.out.println("batata com features");
+							batata++;
 						} catch (ArrayIndexOutOfBoundsException e) {
-							System.out.println("batata doce");
+							System.out.println("broker session weekday  : " + Integer.toString(currentSession.getWeekday()) + "\nbroker session startTime: " + Integer.toString(currentSession.getStartTime()));
+							throw e;
 						}
 					}
 				}
 			}
 		}
+		System.out.println(Integer.toString(batata) + " sessions com feature requirement");
 	}
 	
 	private void alocaSessionsRestantes() {
-		int i, j, k;		
+		int i, j, k;
+		int batata = 0;
 
 		// loop through courses
 		for (i = 0; i < this.courses.size(); i++) {
@@ -141,13 +145,15 @@ public class Alocador {
 					if (currentSession.getSessionRoom() == null) {
 						try {
 							this.matchSessionAndRoom(currentSession);
-							System.out.println("batata");
+							batata++;
 						} catch (ArrayIndexOutOfBoundsException e) {
-							System.out.println("batata doce");
+							System.out.println("broker session weekday  : " + Integer.toString(currentSession.getWeekday()) + "\nbroker session startTime: " + Integer.toString(currentSession.getStartTime()));
+							throw e;
 						}
 					}
 				}
 			}
 		}
+		System.out.println(Integer.toString(batata) + " sessions sem feature/room requirement");
 	}
 }

@@ -23,8 +23,6 @@ public class TagSession implements Tag {
 		List<Session> sessions = new ArrayList<Session>();
 		for (int i = 0; i < nl.getLength(); i++) {
 		    if (nl.item(i).getNodeType() == Node.ELEMENT_NODE) {
-		    	String sessionReqFeatures = "";
-		    	String sessionReqRoom = "";
 		    	
 		    	Element eSession = (Element) nl.item(i);
 		    	int sessionDuration = 0;
@@ -36,8 +34,8 @@ public class TagSession implements Tag {
 		        }
 		        int sessionStartTime = Integer.parseInt((eSession.getAttribute("start_time")).replace(":", ""));
 		        int sessionWeekday = Integer.parseInt(eSession.getAttribute("weekday"));
-		        sessionReqFeatures.concat(eSession.getAttribute("features_ids"));
-		        sessionReqRoom.concat(eSession.getAttribute("requires_room_id"));
+		        String sessionReqFeatures = eSession.getAttribute("feature_ids").isEmpty() ? "" : eSession.getAttribute("feature_ids");
+		        String sessionReqRoom = eSession.getAttribute("requires_room_id").isEmpty() ? "" : eSession.getAttribute("requires_room_id");
 		        		        
 		        Session s = new Session(sessionDuration, sessionStartTime, sessionWeekday, sessionReqFeatures, sessionReqRoom);
 		        sessions.add(s);
