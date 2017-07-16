@@ -10,21 +10,26 @@ public class Alocador {
 	private DataBase apiDB;
 	private List<Course> courses;
 	private List<Building> buildings;
+	private int sessionCounter;
 	
 	public Alocador(DataBase db) {
 		this.apiDB = db;
 		this.courses = apiDB.getCourses();
 		this.buildings = apiDB.getBuildings();
+		this.sessionCounter = 0;
 	}
 	
 	public void alocar() {
-		this.printBuildings(this.buildings);
+		//this.printBuildings(this.buildings);
 		
 		this.alocaComRoomRequirement();
 		this.alocaComFeatureRequirement();
 		this.alocaSessionsRestantes();
+		
+		System.out.println(Integer.toString(this.sessionCounter) + " seções alocadas com sucesso.");
 	}
 	
+	@SuppressWarnings("unused")
 	private void printBuildings(List<Building> b) {
 		int i, j;
 		for (i = 0; i < b.size(); i++) {
@@ -49,20 +54,10 @@ public class Alocador {
 				Room currentRoom = this.buildings.get(i).getRooms().get(j);
 				String roomId = currentRoom.getId();
 				
-//				String roomFeatures = currentRoom.getFeatures();
-//				System.out.println("\nRequired feature: " + s.getFeaturesRequired() +
-//								   " | Required room: " + s.getRoomRequired() +
-//								   " | current building id: " + this.buildings.get(i).getId() +
-//								   " | current room ID: " + currentRoom.getId() +
-//								   " | current room features: " + roomFeatures + 
-//								   " | gotTheFeature: " + Boolean.toString(this.gotTheFeature(s, currentRoom)));	
-				
 				// if it is the required room OR if there is no required room
 				if (s.getRoomRequired().equals(roomId) || s.getRoomRequired().isEmpty()) {
-					//System.out.println("\tI got the room you want!");
 					// if the room has the required features (always true if no features required)
 					if (this.gotTheFeature(s, currentRoom)){
-						//System.out.println("\tI got the features you want!");
 						// if room is available at the session's scheduled day and time
 						if (this.checkRoomSchedule(s, currentRoom)) {
 							///System.out.println("\tI got the time you want!");
@@ -120,7 +115,6 @@ public class Alocador {
 	
 	private void alocaComRoomRequirement() {
 		int i, j, k;		
-		int batata = 0;
 		
 		// loop through courses
 		for (i = 0; i < this.courses.size(); i++) {
@@ -133,9 +127,9 @@ public class Alocador {
 					if (currentSession.checkRoomRequirement()) {
 						try {
 							if (this.matchSessionAndRoom(currentSession))
-								batata++;
-//							else 
-//								System.out.println("Session not alocated! Room required = " + currentSession.getRoomRequired());
+								this.sessionCounter++;
+							else 
+								System.out.println("Session not alocated! Room required = " + currentSession.getRoomRequired());
 						} catch (ArrayIndexOutOfBoundsException e) {
 							System.out.println("Broker session weekday  : " + Integer.toString(currentSession.getWeekday()) + "\nbroker session startTime: " + Integer.toString(currentSession.getStartTime()));
 							throw e;
@@ -144,12 +138,10 @@ public class Alocador {
 				}
 			}
 		}
-		System.out.println(Integer.toString(batata) + " sessions com room requirement");
 	}
 	
 	private void alocaComFeatureRequirement() {
 		int i, j, k;
-		int batata = 0;
 
 		// loop through courses
 		for (i = 0; i < this.courses.size(); i++) {
@@ -162,9 +154,9 @@ public class Alocador {
 					if (currentSession.checkFeatureRequirement() && currentSession.getSessionRoom() == null) {
 						try {
 							if (this.matchSessionAndRoom(currentSession))
-								batata++;
-//							else 
-//								System.out.println("Session not alocated! Features required = " + currentSession.getFeaturesRequired());
+								this.sessionCounter++;
+							else 
+								System.out.println("Session not alocated! Features required = " + currentSession.getFeaturesRequired());
 						} catch (ArrayIndexOutOfBoundsException e) {
 							System.out.println("broker session weekday  : " + Integer.toString(currentSession.getWeekday()) + "\nbroker session startTime: " + Integer.toString(currentSession.getStartTime()));
 							throw e;
@@ -173,12 +165,10 @@ public class Alocador {
 				}
 			}
 		}
-		System.out.println(Integer.toString(batata) + " sessions com feature requirement");
 	}
 	
 	private void alocaSessionsRestantes() {
 		int i, j, k;
-		int batata = 0;
 
 		// loop through courses
 		for (i = 0; i < this.courses.size(); i++) {
@@ -191,7 +181,7 @@ public class Alocador {
 					if (currentSession.getSessionRoom() == null) {
 						try {
 							if (this.matchSessionAndRoom(currentSession))
-								batata++;
+								this.sessionCounter++;
 						} catch (ArrayIndexOutOfBoundsException e) {
 							System.out.println("broker session weekday  : " + Integer.toString(currentSession.getWeekday()) + "\nbroker session startTime: " + Integer.toString(currentSession.getStartTime()));
 							throw e;
@@ -200,6 +190,5 @@ public class Alocador {
 				}
 			}
 		}
-		System.out.println(Integer.toString(batata) + " sessions sem feature/room requirement");
 	}
 }
