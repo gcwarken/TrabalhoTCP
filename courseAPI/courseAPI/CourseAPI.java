@@ -9,17 +9,17 @@ public class CourseAPI {
 
 	public static void main(String[] args) throws Exception {
 				
-	    if(args.length == 0)
-	    {
-	        System.out.println("Para usar a API corretamente forneça um arquivo de entrada");
-	        System.exit(0);
-	    }
-		String inputFileName = args[0];
+//	    if(args.length == 0)
+//	    {
+//	        System.out.println("Para usar a API corretamente forneça um arquivo de entrada");
+//	        System.exit(0);
+//	    }
+//		String inputFileName = args[0];
 		
 		printLogo();
 		
-		//String inputFileName = "DemandasRecursos.xml";
-		//String inputFileName = "test.xml";
+		String inputFileName = "DemandasRecursos.xml";
+//		String inputFileName = "test.xml";
 
 		DataBase db = new DataBase();
 				
