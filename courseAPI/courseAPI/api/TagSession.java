@@ -45,11 +45,27 @@ public class TagSession implements Tag {
 	}
 	
 	public static Session createObject(List<Cell> c){
-		
-		int duration = Integer.valueOf(c.get(6).getContents());
+		int duration;
+		if( c.get(6).getContents() != "")
+			duration = Integer.valueOf(c.get(6).getContents());
+		else
+			duration = 120;
 		int time = Integer.valueOf(c.get(9).getContents().replace(":", ""));
 		int day = Integer.valueOf(c.get(8).getContents());
-		Session s = new Session(duration, time, day, c.get(12).getContents(), c.get(11).getContents()); 
+		String fRequired;
+		String rRequired;
+		if(c.size() > 11){
+			fRequired = c.get(11).getContents();
+			}
+		else
+			fRequired = "";
+		if(c.size() > 10){
+			rRequired = c.get(10).getContents();
+			}
+		else
+			rRequired = "";
+		
+		Session s = new Session(duration, time, day, fRequired, rRequired); 
 		return s;
 	}
 	

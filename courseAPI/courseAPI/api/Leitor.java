@@ -160,33 +160,61 @@ public class Leitor {
             	}
             }
             
-            found = false;
-            for(i=0; i<demandas.getRows(); i++)
+            boolean foundC = false, foundG = false;
+            int courseIndex = 0, groupIndex = 0;
+            Course c;
+            System.out.println(demandas.getRows());
+            for(i=0; i<demandas.getRows()-1; i++)
             {
-            	Course c = TagCourse.createObject(new ArrayList<Cell>(Arrays.asList(demandas.getRow(i+1))));
+            	c = TagCourse.createObject(new ArrayList<Cell>(Arrays.asList(demandas.getRow(i+1))));
             	
 	            int j;
-	            for(j=0; j<db.getCourses().size(); j++){
-	            	if(db.getCourses().get(j).getCourseID().equals(c.getCourseID()))
+	            for(j=0; j<db.getCourses().size(); j++)
+	            {
+	            	if(db.getCourses().get(j).getCourseID().equals(c.getCourseID()) && 
+	            			db.getCourses().get(j).getCourseName().equals(c.getCourseID()))
 	            	{
-		            	int k;
+	            		foundC = true;
+	            		courseIndex = j;
+	            		int k;
 		            	for(k=0; k<db.getCourses().get(j).getGroups().size(); k++)
 		            	{
-		            		if(db.getCourses().get(j).getGroups().get(k).getGroupSessions())){
-			            		found = true;
+		            		if(db.getCourses().get(j).getGroups().get(k).getGroupId().equals(c.getGroups().get(0).getGroupId()))
+							{
+			            		foundG = true;
+			            		groupIndex = k;
 			            		break;
 			           		}
-			           		else{
-			           			
-			           		}
 		            	}
-	            	}
-	            	else 
-	            	{
-	            		
+	            		break;
 	            	}
             	}
+	            Session sec;
+	            System.out.println(foundC + "  " + foundG);
+	            if(foundC && foundG)
+	            {
+	            	sec = c.getGroups().get(0).getGroupSessions().get(0);
+	            	db.getCourses().get(courseIndex).getGroups().get(groupIndex).getGroupSessions().add(sec);
+	            }
+	            else if(foundC && !foundG)
+	            {
+	            	db.getCourses().get(courseIndex).getGroups().add(c.getGroups().get(0));
+	            }
+	            else
+	            {
+	            	db.addCourse(c);
+	            }
+	            
+	            courseIndex = 0;
+	            groupIndex = 0;
+	            foundC =false;
+	            foundG = false;
+	      
             }
+            
+        
+
+            
             
         } catch (IOException e) {
          e.printStackTrace();
