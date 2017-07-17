@@ -38,6 +38,13 @@ public class TagFeature implements Tag {
 		return features;
 	}
 	
+	public static Feature createObject(List<Cell> c) {
+
+		Feature f = new Feature(Integer.valueOf(c.get(1).getContents()), c.get(0).getContents());
+		
+		return f;
+	}
+	
 	public Element createNewElements(Object o, Document doc) {
 		Feature featureObj = (Feature) o;
 		

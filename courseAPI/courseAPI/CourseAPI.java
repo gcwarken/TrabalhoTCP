@@ -2,6 +2,8 @@ package courseAPI;
 
 import courseAPI.api.*;
 import courseAPI.domain.*;
+
+import java.util.ArrayList;
 import java.util.List;
 
 
@@ -16,17 +18,38 @@ public class CourseAPI {
 //	    }
 //		String inputFileName = args[0];
 		
-		String inputFileName = "DemandasRecursos.xml";
+		String inputFileName = "PlanilhaSalasEDemandas.xls";
 		//String inputFileName = "test.xml";
 
 		DataBase db = new DataBase();
 				
 		Leitor l = new Leitor(inputFileName, db);
 		l.getFileInfo();
-	
 		
-		Alocador alocador = new Alocador(db);
-		alocador.alocar();
+		List<Feature> f = new ArrayList<Feature>();
+		f = db.getFeatures();
+		List<Building> b = new ArrayList<Building>();
+		b = db.getBuildings();
+		
+		int i;
+		for(i = 0; i < f.size(); i++)
+		{
+			System.out.println(f.get(i).getName());
+			System.out.println(f.get(i).getId());
+		}
+		
+		for(i = 0; i<b.size(); i++)
+		{
+			System.out.println(b.get(i).getId());
+			int j;
+			for(j = 0; j<b.get(i).getRooms().size(); j++){
+				System.out.println(b.get(i).getRooms().get(j).getFeatures());
+			}
+		}
+		
+		
+		/*Alocador alocador = new Alocador(db);
+		alocador.alocar();*/
 		
 		
 				

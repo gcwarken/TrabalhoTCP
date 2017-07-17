@@ -44,6 +44,15 @@ public class TagSession implements Tag {
 		return sessions;
 	}
 	
+	public static Session createObject(List<Cell> c){
+		
+		int duration = Integer.valueOf(c.get(6).getContents());
+		int time = Integer.valueOf(c.get(9).getContents().replace(":", ""));
+		int day = Integer.valueOf(c.get(8).getContents());
+		Session s = new Session(duration, time, day, c.get(12).getContents(), c.get(11).getContents()); 
+		return s;
+	}
+	
 	public Element createNewElements(Object o, Document doc) {
 		Session sObj = (Session) o;
 		

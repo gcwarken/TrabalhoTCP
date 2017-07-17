@@ -45,6 +45,16 @@ public class TagGroup implements Tag {
 		return groups;
 	}
 	
+	public static Group createObject(List<Cell> c){
+		List<Session> s = new ArrayList<Session>();
+		s.add(TagSession.createObject(c));
+		String id = c.get(4).getContents();
+		String teacher = c.get(3).getContents();
+		int numStudents = Integer.valueOf(c.get(2).getContents());
+		Group g = new Group(id,teacher,numStudents, s);
+		return g;
+	}
+	
 	public Element createNewElements(Object o, Document doc) {
 		Group groupObj = (Group) o;
 		

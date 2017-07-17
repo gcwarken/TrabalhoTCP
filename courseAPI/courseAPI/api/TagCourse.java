@@ -14,6 +14,7 @@ import org.w3c.dom.NodeList;
 
 import courseAPI.domain.Course;
 import courseAPI.domain.Group;
+import courseAPI.domain.Session;
 
 public class TagCourse implements Tag {
 	
@@ -46,6 +47,15 @@ public class TagCourse implements Tag {
 		return courses;
 	}
 	
+	public static Course createObject(List<Cell> c){
+		List<Group> g = new ArrayList<Group>();
+		g.add(TagGroup.createObject(c));
+		String name = c.get(0).getContents();
+		String id = c.get(1).getContents();
+		Course course = new Course(name, id,g);
+		return course;
+	}
+
 	public Element createNewElements(Object o, Document doc){
 	
 		Course courseObj = (Course) o;

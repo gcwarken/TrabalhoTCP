@@ -9,6 +9,7 @@ import org.w3c.dom.Element;
 import org.w3c.dom.Node;
 import org.w3c.dom.NodeList;
 
+import courseAPI.domain.Building;
 import courseAPI.domain.Room;
 import jxl.Cell;
 
@@ -33,6 +34,11 @@ public class TagRoom implements Tag {
 		    }
 	    }
 		return rooms;
+	}
+	
+	public static Room createObject(List<Cell> c){
+		Room r = new Room(c.get(1).getContents(),Integer.valueOf(c.get(3).getContents()),c.get(2).getContents());
+		return r;
 	}
 	
 	public Element createNewElements(Object o, Document doc) {

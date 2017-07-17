@@ -41,6 +41,14 @@ public final class TagBuilding implements Tag {
 		return buildings;
 	}
 	
+	public static Building createObject(List<Cell> c){
+		
+		List<Room> r = new ArrayList<Room>();
+		r.add(TagRoom.createObject(c));
+		Building b = new Building(c.get(0).getContents(), r);
+		return b;
+	}
+	
 	public Element createNewElements(Object o, Document doc) {
 			
 		Building bObj = (Building) o;

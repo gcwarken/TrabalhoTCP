@@ -2,6 +2,10 @@ package courseAPI.api;
 
 import courseAPI.DataBase;
 import courseAPI.domain.*;
+import jxl.Sheet;
+import jxl.Workbook;
+import jxl.Cell;
+import jxl.read.biff.BiffException;
 
 import javax.xml.parsers.DocumentBuilderFactory;
 import javax.xml.parsers.ParserConfigurationException;
@@ -13,6 +17,8 @@ import org.w3c.dom.NodeList;
 import org.xml.sax.SAXException;
 import java.io.File;
 import java.io.IOException;
+import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.List;
 
 
@@ -35,10 +41,14 @@ public class Leitor {
 		
 		if (extension.equals("xml")) {
 			doc = readXml();
+			callTags(doc);
+		}
+		else if(extension.equals("xls")){
+			readXls();
 		}
 		else System.out.println("Invalid input file");
 		
-		callTags(doc);
+		
 	}
 
 	/////////////////////////////////////////
@@ -111,6 +121,84 @@ public class Leitor {
 			    }
 			}
 		}
+	}
+	
+	private void readXls()
+	{
+		Workbook workbook = null;
+        try {
+
+            workbook = Workbook.getWorkbook(new File(inputFileName));
+            Sheet demandas = workbook.getSheet("Demandas");
+            Sheet features = workbook.getSheet("Features");
+            Sheet buildings = workbook.getSheet("Espaço Físico");
+            
+            int i;
+            for(i=0; i<features.getRows()-1; i++)
+            {
+            	db.addFeature((Feature)TagFeature.createObject(new ArrayList<Cell>(Arrays.asList(features.getRow(i+1)))));
+            }
+            
+            for(i=0; i<buildings.getRows()-1; i++)
+            {
+            	Building b = TagBuilding.createObject(new ArrayList<Cell>(Arrays.asList(buildings.getRow(i+1))));
+        
+        		int j;
+        		boolean found = false;
+            	for(j=0; j<db.getBuildings().size(); j++){
+            		if(b.getId().equals(db.getBuildings().get(j).getId())){
+            			found = true;
+            			break;
+            		}
+            	}
+            	
+            	if(found){
+            		db.getBuildings().get(j).getRooms().addAll(b.getRooms());
+            	}
+            	else {
+        			db.addBuilding(b);          		
+            	}
+            }
+            
+            found = false;
+            for(i=0; i<demandas.getRows(); i++)
+            {
+            	Course c = TagCourse.createObject(new ArrayList<Cell>(Arrays.asList(demandas.getRow(i+1))));
+            	
+	            int j;
+	            for(j=0; j<db.getCourses().size(); j++){
+	            	if(db.getCourses().get(j).getCourseID().equals(c.getCourseID()))
+	            	{
+		            	int k;
+		            	for(k=0; k<db.getCourses().get(j).getGroups().size(); k++)
+		            	{
+		            		if(db.getCourses().get(j).getGroups().get(k).getGroupSessions())){
+			            		found = true;
+			            		break;
+			           		}
+			           		else{
+			           			
+			           		}
+		            	}
+	            	}
+	            	else 
+	            	{
+	            		
+	            	}
+            	}
+            }
+            
+        } catch (IOException e) {
+         e.printStackTrace();
+		} catch (BiffException e) {
+            e.printStackTrace();
+        } finally {
+
+            if (workbook != null) {
+                workbook.close();
+            }
+
+        }
 	}
 
 }
