@@ -26,7 +26,7 @@ public class Alocador {
 		this.alocaComFeatureRequirement();
 		this.alocaSessionsRestantes();
 		
-		System.out.println(Integer.toString(this.sessionCounter) + " seções alocadas com sucesso.\n");
+		System.out.println(Integer.toString(this.sessionCounter) + " sessões alocadas com sucesso.\n");
 	}
 	
 	@SuppressWarnings("unused")
